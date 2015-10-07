@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.icaboalo.historystoreapp.R;
+import com.icaboalo.historystoreapp.domain.CaptureListModel;
+import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,5 +36,22 @@ public class CaptureListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+    }
+
+    List<CaptureListModel> createCaptureList(){
+        List<CaptureListModel> captureList = new ArrayList<>();
+//        captureList.add();
+        return captureList;
+    }
+
+    private void setUpRecyclerView() {
+        CaptureRecyclerAdapter captureRecyclerAdapter = new CaptureRecyclerAdapter(createCaptureList(), getActivity());
+        mCaptureRecyclerView.setAdapter(captureRecyclerAdapter);
     }
 }
