@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,12 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+//        replaceFragment();
+        navigationViewOnCLick();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        navigationViewOnCLick();
+
     }
 
     private void navigationViewOnCLick(){
@@ -37,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
-
+                    case R.id.action_capture_list:
+                        break;
                 }
-                replaceFragment(fragment);
+//                replaceFragment(fragment);
                 mDrawerLayout.closeDrawers();
                 return false;
             }
