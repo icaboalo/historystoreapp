@@ -1,4 +1,4 @@
-package com.icaboalo.historystoreapp;
+package com.icaboalo.historystoreapp.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,6 +8,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.icaboalo.historystoreapp.R;
+import com.icaboalo.historystoreapp.ui.fragment.CaptureListFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        replaceFragment();
+        replaceFragment(new CaptureListFragment());
         navigationViewOnCLick();
     }
 
@@ -42,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.action_capture_list:
+                        fragment = new CaptureListFragment();
                         break;
                 }
-//                replaceFragment(fragment);
+                replaceFragment(fragment);
                 mDrawerLayout.closeDrawers();
                 return false;
             }
