@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.EmptyFragmentActivity"
+            android:label="@string/title_activity_empty_fragment"
+            android:parentActivityName=".ui.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.icaboalo.historystoreapp.ui.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

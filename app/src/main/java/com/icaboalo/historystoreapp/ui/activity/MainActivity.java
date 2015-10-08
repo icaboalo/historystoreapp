@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -79,11 +80,19 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                return true;
+            case R.id.action_add_capture:
+                goToAddCapture();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void goToAddCapture() {
+        Intent goToAddCapture = new Intent(this, EmptyFragmentActivity.class);
+        startActivity(goToAddCapture);
     }
 }
