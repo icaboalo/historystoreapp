@@ -45,7 +45,7 @@ public class ApiClient {
         return productApiService;
     }
 
-    public static void postProduct(Callback<ProductPostModel> productApiPost){
-        productApiService.postProduct(productApiPost);
+    public static void postProduct(String key, String name, int categoryId, Callback<ProductPostModel> productApiPost){
+        productApiService.postProduct(name, productApiPost);
     }
 }
