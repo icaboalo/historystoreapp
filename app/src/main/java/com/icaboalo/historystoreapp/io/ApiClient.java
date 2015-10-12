@@ -1,7 +1,10 @@
 package com.icaboalo.historystoreapp.io;
 
+import com.icaboalo.historystoreapp.domain.ProductPostModel;
 import com.icaboalo.historystoreapp.domain.VendorModel;
-import com.icaboalo.historystoreapp.io.constant.VendorConstants;
+import com.icaboalo.historystoreapp.io.constant.Constants;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -16,7 +19,7 @@ public class ApiClient {
     public static ApiService getVendorApiService(){
         if (vendorApiService == null){
             RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(VendorConstants.BASE_URL)
+                    .setEndpoint(Constants.BASE_URL)
                     .setLogLevel(RestAdapter.LogLevel.BASIC)
                     .build();
             vendorApiService = restAdapter.create(ApiService.class);
@@ -24,7 +27,25 @@ public class ApiClient {
         return vendorApiService;
     }
 
-    public static void searchVendor(Callback<VendorModel> vendorApiResponse){
+    public static void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse){
         getVendorApiService().searchVendor(vendorApiResponse);
+    }
+
+    public static ApiService productApiService;
+
+    public static ApiService postProductApiService(){
+        if (postProductApiService() == null){
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(Constants.BASE_URL)
+                    .setLogLevel(RestAdapter.LogLevel.BASIC)
+                    .build();
+            productApiService = restAdapter.create(ApiService.class);
+        }
+
+        return productApiService;
+    }
+
+    public static void postProduct(Callback<ProductPostModel> productApiPost){
+        productApiService.postProduct(productApiPost);
     }
 }
