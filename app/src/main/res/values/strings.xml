@@ -13,4 +13,6 @@
 
     <string name="capture_list">Capture List</string>
     <string name="title_activity_empty_fragment">EmptyFragmentActivity</string>
+    <string name="product_price_input_hint">Price</string>
+    <string name="capture_unit_price_label">Capture the unit price for the commentary and prices in other markets</string>
 </resources>
