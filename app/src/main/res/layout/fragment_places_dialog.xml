@@ -11,7 +11,7 @@
         android:layout_width="match_parent">
 
         <EditText
-            android:id="@+id/place_input"
+            android:id="@+id/new_place_input"
             android:hint="Place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -24,33 +24,10 @@
         android:layout_width="match_parent">
 
         <EditText
-            android:id="@+id/vendor_input"
+            android:id="@+id/new_vendor_input"
             android:hint="Vendor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.TextInputLayout>
-
-    <FrameLayout
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="OK"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center"/>
-
-        <TextView
-            android:text="CANCEL"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-
-    </FrameLayout>
 
 </LinearLayout>
