@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
+import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/10/2015.
@@ -45,7 +46,7 @@ public class ApiClient {
         return productApiService;
     }
 
-    public static void postProduct(String key, String name, int categoryId, Callback<ProductPostModel> productApiPost){
-        productApiService.postProduct(name, productApiPost);
+    public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
+        postProductApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
     }
 }

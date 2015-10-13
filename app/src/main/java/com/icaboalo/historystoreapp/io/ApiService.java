@@ -7,7 +7,8 @@ import com.icaboalo.historystoreapp.io.constant.Constants;
 import java.util.ArrayList;
 
 import retrofit.Callback;
-import retrofit.http.Field;
+import retrofit.client.Response;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 
@@ -20,6 +21,5 @@ public interface ApiService {
     void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse);
 
     @POST(Constants.PATH_PRODUCTS)
-    void postProduct(@Field("name") String productName,
-                     Callback<ProductPostModel> productApiPost);
+    void postProduct(@Body ProductPostModel productPost, Callback<Response> product);
 }

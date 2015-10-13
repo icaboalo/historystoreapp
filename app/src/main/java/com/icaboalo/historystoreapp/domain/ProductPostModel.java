@@ -7,6 +7,12 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ProductPostModel {
 
+    public ProductPostModel(String productKey, String productName, String productCategoryId) {
+        this.productKey = productKey;
+        this.productName = productName;
+        this.productCategoryId = productCategoryId;
+    }
+
     @SerializedName("key")
     String productKey;
 
