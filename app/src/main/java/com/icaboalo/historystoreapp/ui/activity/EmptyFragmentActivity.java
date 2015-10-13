@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.ui.fragment.AddCaptureFragment;
+import com.icaboalo.historystoreapp.ui.fragment.PlacesFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,7 +32,7 @@ public class EmptyFragmentActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        replaceFragment(new AddCaptureFragment());
+        replaceFragment(new PlacesFragment());
     }
 
     private void replaceFragment(Fragment fragment) {
