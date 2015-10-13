@@ -27,6 +27,8 @@ public class CaptureListFragment extends Fragment {
     @Bind(R.id.capture_recycler_view)
     RecyclerView mCaptureRecyclerView;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class CaptureListFragment extends Fragment {
 
     List<CaptureListModel> createCaptureList(){
         List<CaptureListModel> captureList = new ArrayList<>();
-//        captureList.add();
+        //captureList.add();
         return captureList;
     }
 

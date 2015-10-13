@@ -15,4 +15,12 @@
     <string name="title_activity_empty_fragment">EmptyFragmentActivity</string>
     <string name="product_price_input_hint">Price</string>
     <string name="capture_unit_price_label">Capture the unit price for the commentary and prices in other markets</string>
+
+
+    <string name="type_uom_prompt">Choice type</string>
+    <string-array name="type_uom_array">
+        <item>Kilogramo</item>
+        <item>Litro</item>
+        <item>Pieza</item>
+    </string-array>
 </resources>
