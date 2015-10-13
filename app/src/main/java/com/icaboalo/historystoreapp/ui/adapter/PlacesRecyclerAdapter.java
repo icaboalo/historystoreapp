@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
@@ -22,22 +21,19 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     List<PlaceListModel> mPlaceList = new ArrayList<>();
     Context mContext;
     LayoutInflater mInflater;
+    MyViewHolder.MyViewHolderClick clickListener;
 
-    public PlacesRecyclerAdapter(List<PlaceListModel> placeList, Context context) {
+    public PlacesRecyclerAdapter(List<PlaceListModel> placeList, Context context, MyViewHolder.MyViewHolderClick clickListener) {
         mPlaceList = placeList;
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        this.clickListener = clickListener;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, new MyViewHolder.MyViewHolderClick() {
-            @Override
-            public void onMyClick(View item) {
-                Toast.makeText(mContext, "success", Toast.LENGTH_SHORT).show();
-            }
-        });
+        final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
+        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, clickListener );
         return viewHolder;
     }
 

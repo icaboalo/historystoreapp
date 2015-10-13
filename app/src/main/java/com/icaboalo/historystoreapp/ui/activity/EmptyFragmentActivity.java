@@ -1,17 +1,15 @@
 package com.icaboalo.historystoreapp.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.ui.fragment.PlacesFragment;
+import com.icaboalo.historystoreapp.util.VUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,9 +19,6 @@ public class EmptyFragmentActivity extends AppCompatActivity {
     @Bind(R.id.app_bar)
     Toolbar mToolbar;
 
-    @Bind(R.id.fragment_container)
-    FrameLayout mFragmentContainer; 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +27,7 @@ public class EmptyFragmentActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        replaceFragment(new PlacesFragment());
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        VUtil.replaceFragment(new PlacesFragment(), getSupportFragmentManager());
     }
 
     @Override

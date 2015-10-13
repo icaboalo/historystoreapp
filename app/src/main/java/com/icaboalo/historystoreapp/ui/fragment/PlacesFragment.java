@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
+import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * Created by icaboalo on 10/12/2015.
  */
-public class PlacesFragment extends Fragment {
+public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.MyViewHolder.MyViewHolderClick {
 
     @Bind(R.id.places_list)
     RecyclerView mPlacesRecyclerView;
@@ -54,8 +55,13 @@ public class PlacesFragment extends Fragment {
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        PlacesRecyclerAdapter placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity());
+        PlacesRecyclerAdapter placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
         mPlacesRecyclerView.setLayoutManager(linearLayoutManager);
         mPlacesRecyclerView.setAdapter(placesRecyclerAdapter);
+    }
+
+    @Override
+    public void onMyClick(View item) {
+        VUtil.replaceFragment(new AddCaptureFragment(), getFragmentManager());
     }
 }
