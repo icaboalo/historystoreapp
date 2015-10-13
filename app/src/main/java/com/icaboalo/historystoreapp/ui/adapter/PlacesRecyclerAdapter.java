@@ -37,7 +37,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
-        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, clickListener );
+        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.vendor, R.id.place, clickListener);
         return viewHolder;
     }
 
@@ -45,6 +45,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PlaceListModel placeList = mPlaceList.get(position);
         holder.setPlace(placeList.getPlace());
+        holder.setVendor(placeList.getVendor());
     }
 
     @Override
@@ -58,18 +59,23 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView mPlace;
+        TextView mPlace, mVendor;
         MyViewHolderClick mMyViewHolderClick;
 
-        public MyViewHolder(View itemView, int placeTextId, MyViewHolderClick clickListener) {
+        public MyViewHolder(View itemView, int placeTextId, int vendorTextId, MyViewHolderClick clickListener) {
             super(itemView);
             mPlace = (TextView) itemView.findViewById(placeTextId);
+            mVendor = (TextView) itemView.findViewById(vendorTextId);
             mMyViewHolderClick = clickListener;
             itemView.setOnClickListener(this);
         }
 
         public void setPlace(String place) {
             mPlace.setText(place);
+        }
+
+        public void setVendor(String vendor){
+            mVendor.setText(vendor);
         }
 
         @Override
