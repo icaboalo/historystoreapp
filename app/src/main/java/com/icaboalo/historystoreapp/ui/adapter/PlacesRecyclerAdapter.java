@@ -30,6 +30,10 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         this.clickListener = clickListener;
     }
 
+    public void newData(List<PlaceListModel> newList){
+        mPlaceList = newList;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);

@@ -40,6 +40,7 @@ public class PlaceDialogFragment extends DialogFragment {
         return fragment;
     }
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,14 +61,13 @@ public class PlaceDialogFragment extends DialogFragment {
                 dialog.dismiss();
             }
         });
+
         alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-
-
         return alertDialog.create();
 
     }
