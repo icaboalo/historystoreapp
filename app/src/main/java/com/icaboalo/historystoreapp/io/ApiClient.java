@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.io;
 
+import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
 import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
@@ -32,6 +33,8 @@ public class ApiClient {
         getVendorApiService().searchVendor(vendorApiResponse);
     }
 
+
+//    product
     public static ApiService productApiService;
 
     public static ApiService postProductApiService(){
@@ -48,5 +51,23 @@ public class ApiClient {
 
     public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
         postProductApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
+    }
+
+//    list
+    public static ApiService listApiService;
+    public static ApiService getListApiService(){
+        if (listApiService == null){
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(Constants.BASE_URL)
+                    .setLogLevel(RestAdapter.LogLevel.BASIC)
+                    .build();
+            listApiService = restAdapter.create(ApiService.class);
+        }
+
+        return listApiService;
+    }
+
+    public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
+        getListApiService().searchList(listApiResponse);
     }
 }

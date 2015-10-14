@@ -11,13 +11,13 @@ public class ListsModel {
     String placeListId;
 
     @SerializedName("place")
-    String place;
+    PlaceModel place;
 
     @SerializedName("vendor")
-    String vendor;
+    VendorModel vendor;
 
     @SerializedName("user")
-    String user;
+    UserModel user;
 
     @SerializedName("status")
     boolean placeListStatus;
@@ -26,15 +26,15 @@ public class ListsModel {
         return placeListId;
     }
 
-    public String getPlace() {
+    public PlaceModel getPlace() {
         return place;
     }
 
-    public String getVendor() {
+    public VendorModel getVendor() {
         return vendor;
     }
 
-    public String getUser() {
+    public UserModel getUser() {
         return user;
     }
 
