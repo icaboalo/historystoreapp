@@ -3,6 +3,7 @@ package com.icaboalo.historystoreapp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     @Bind(R.id.places_list)
     RecyclerView mPlacesRecyclerView;
 
+    PlacesRecyclerAdapter placesRecyclerAdapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +60,14 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     List<PlaceListModel> addPlace(){
         List<PlaceListModel> place = new ArrayList<>();
-        place.add(new PlaceListModel("Bodega Aurrera"));
-        place.add(new PlaceListModel("Comercial Mexicana"));
+        place.add(new PlaceListModel("Av. Magnocentro", "Walmart"));
+        place.add(new PlaceListModel("Blv. Anahuac", "Comercial Mexicana"));
         return place;
     }
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        PlacesRecyclerAdapter placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
+        placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
         mPlacesRecyclerView.setLayoutManager(linearLayoutManager);
         mPlacesRecyclerView.setAdapter(placesRecyclerAdapter);
     }
@@ -90,10 +93,17 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         switch (id){
             case R.id.action_settings:
                 return true;
-            case R.id.action_add_capture:
+            case R.id.action_add_place:
+                showDialog();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialog() {
+        FragmentManager fragmentManager = getFragmentManager();
+        PlaceDialogFragment placeDialogFragment = new PlaceDialogFragment().newInstance("Add Place");
+        placeDialogFragment.show(fragmentManager, "fragment_add_place");
     }
 }

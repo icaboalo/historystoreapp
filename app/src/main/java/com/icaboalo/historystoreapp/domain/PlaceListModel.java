@@ -5,8 +5,11 @@ package com.icaboalo.historystoreapp.domain;
  */
 public class PlaceListModel {
 
-    public PlaceListModel(String place) {
+    private String mVendor;
+
+    public PlaceListModel(String place, String vendor) {
         mPlace = place;
+        mVendor = vendor;
     }
 
     String mPlace;
@@ -17,5 +20,9 @@ public class PlaceListModel {
 
     public void setPlace(String place) {
         mPlace = place;
+    }
+
+    public String getVendor() {
+        return mVendor;
     }
 }

@@ -11,7 +11,7 @@ import com.icaboalo.historystoreapp.util.VUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EmptyFragmentActivity extends AppCompatActivity {
+public class EmptyFragmentActivity extends AppCompatActivity{
 
     @Bind(R.id.app_bar)
     Toolbar mToolbar;

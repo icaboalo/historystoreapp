@@ -49,7 +49,9 @@ public class CaptureListFragment extends Fragment {
 
     List<CaptureListModel> createCaptureList(){
         List<CaptureListModel> captureList = new ArrayList<>();
-//        captureList.add();
+        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
+        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
+        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
         return captureList;
     }
 

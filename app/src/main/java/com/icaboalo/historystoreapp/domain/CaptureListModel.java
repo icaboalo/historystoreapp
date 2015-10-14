@@ -5,6 +5,12 @@ package com.icaboalo.historystoreapp.domain;
  */
 public class CaptureListModel {
 
+    public CaptureListModel(String captureDate, String capturePrice, String capturePlace) {
+        mCaptureDate = captureDate;
+        mCapturePrice = capturePrice;
+        mCapturePlace = capturePlace;
+    }
+
     String mCaptureDate;
     String mCapturePrice;
     String mCapturePlace;
