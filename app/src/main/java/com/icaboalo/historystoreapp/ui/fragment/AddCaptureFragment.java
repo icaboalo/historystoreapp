@@ -10,9 +10,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.icaboalo.historystoreapp.R;
+import com.icaboalo.historystoreapp.io.ApiClient;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/8/2015.
@@ -42,6 +46,19 @@ public class AddCaptureFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        ApiClient client = new ApiClient();
+        client.postProduct("", "test", "", new Callback<Response>() {
+
+            @Override
+            public void success(Response response, Response response2) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
         
     }
 }
