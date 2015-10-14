@@ -1,4 +1,4 @@
-package com.icaboalo.historystoreapp.domain;
+package com.icaboalo.historystoreapp.domain.retrofit;
 
 import com.google.gson.annotations.SerializedName;
 

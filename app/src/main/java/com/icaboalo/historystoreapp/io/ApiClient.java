@@ -1,7 +1,7 @@
 package com.icaboalo.historystoreapp.io;
 
-import com.icaboalo.historystoreapp.domain.ProductPostModel;
-import com.icaboalo.historystoreapp.domain.VendorModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
+import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
 
 import java.util.ArrayList;

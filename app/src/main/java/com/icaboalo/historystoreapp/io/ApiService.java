@@ -1,7 +1,8 @@
 package com.icaboalo.historystoreapp.io;
 
-import com.icaboalo.historystoreapp.domain.ProductPostModel;
-import com.icaboalo.historystoreapp.domain.VendorModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
+import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import retrofit.http.POST;
  * Created by icaboalo on 10/10/2015.
  */
 public interface ApiService {
+
+    @GET(Constants.PATH_LISTS)
+    void searchList(Callback<ArrayList<ListsModel>> listsApiResponse);
 
     @GET(Constants.PATH_VENDORS)
     void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse);
