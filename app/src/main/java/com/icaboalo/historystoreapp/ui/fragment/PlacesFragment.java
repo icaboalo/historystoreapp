@@ -32,6 +32,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     @Bind(R.id.places_list)
     RecyclerView mPlacesRecyclerView;
 
+    PlacesRecyclerAdapter placesRecyclerAdapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        PlacesRecyclerAdapter placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
+        placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
         mPlacesRecyclerView.setLayoutManager(linearLayoutManager);
         mPlacesRecyclerView.setAdapter(placesRecyclerAdapter);
     }

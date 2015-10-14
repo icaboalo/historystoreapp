@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.util.VUtil;
@@ -56,7 +55,7 @@ public class PlaceDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-                Toast.makeText(getActivity(), newPlace, Toast.LENGTH_SHORT).show();
+                String newVendor = VUtil.extractText(mNewVendorInput);
 
                 dialog.dismiss();
             }

@@ -32,12 +32,13 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     public void newData(List<PlaceListModel> newList){
         mPlaceList = newList;
+        notifyDataSetChanged();
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
-        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.vendor, R.id.place, clickListener);
+        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, R.id.vendor, clickListener);
         return viewHolder;
     }
 
@@ -51,10 +52,6 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public int getItemCount() {
         return mPlaceList.size();
-    }
-
-    public void setData(List<PlaceListModel> newList) {
-        mPlaceList = newList;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
