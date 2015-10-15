@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.ui.fragment.AddCaptureFragment;
 import com.icaboalo.historystoreapp.ui.fragment.CaptureListFragment;
 
 import butterknife.Bind;
@@ -35,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-        //replaceFragment(new CaptureListFragment());
-        replaceFragment(new AddCaptureFragment());
+        replaceFragment(new CaptureListFragment());
         navigationViewOnCLick();
     }
 
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_settings:
                 return true;
-            case R.id.action_add_capture:
+            case R.id.action_add_place:
                 goToAddCapture();
                 break;
         }

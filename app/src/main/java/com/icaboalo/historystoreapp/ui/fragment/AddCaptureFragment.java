@@ -10,10 +10,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.domain.Product;
 import com.icaboalo.historystoreapp.domain.Shopping;
 
 import butterknife.Bind;
@@ -98,5 +96,6 @@ public class AddCaptureFragment extends Fragment implements AdapterView.OnItemSe
 
     public void setProductKey(String key){
         this.shopping.getProduct().setKey(key);
+
     }
 }
