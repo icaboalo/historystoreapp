@@ -13,4 +13,6 @@
 
     <string name="capture_list">Capture List</string>
     <string name="title_activity_empty_fragment">EmptyFragmentActivity</string>
+    <string name="action_add_place">Add place</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

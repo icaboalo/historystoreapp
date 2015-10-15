@@ -83,7 +83,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_places, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -99,6 +99,9 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
                 return true;
             case R.id.action_add_place:
                 showDialog();
+                break;
+            case R.id.action_refresh:
+                executeWithRetrofit();
                 break;
         }
 

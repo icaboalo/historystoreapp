@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_settings:
                 return true;
-            case R.id.action_add_place:
+            case R.id.action_add_capture:
                 goToAddCapture();
                 break;
         }
