@@ -7,10 +7,13 @@ public class PlaceListModel {
 
     private String mVendor;
 
-    public PlaceListModel(String place, String vendor) {
+    public PlaceListModel(String place, String vendor, String image) {
         mPlace = place;
         mVendor = vendor;
+        mImage = image;
     }
+
+    String mImage;
 
     String mPlace;
 
@@ -18,11 +21,11 @@ public class PlaceListModel {
         return mPlace;
     }
 
-    public void setPlace(String place) {
-        mPlace = place;
-    }
-
     public String getVendor() {
         return mVendor;
+    }
+
+    public String getImage() {
+        return mImage;
     }
 }

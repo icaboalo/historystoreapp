@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
 public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.MyViewHolder> {
 
     List<PlaceListModel> mPlaceList = new ArrayList<>();
-    Context mContext;
+    static Context mContext;
     LayoutInflater mInflater;
     MyViewHolder.MyViewHolderClick clickListener;
 
@@ -38,7 +40,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
-        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, R.id.vendor, clickListener);
+        final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, R.id.vendor, R.id.place_image, clickListener);
         return viewHolder;
     }
 
@@ -47,6 +49,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         PlaceListModel placeList = mPlaceList.get(position);
         holder.setPlace(placeList.getPlace());
         holder.setVendor(placeList.getVendor());
+        holder.setImage(placeList.getImage());
     }
 
     @Override
@@ -57,12 +60,14 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mPlace, mVendor;
+        ImageView mImage;
         MyViewHolderClick mMyViewHolderClick;
 
-        public MyViewHolder(View itemView, int placeTextId, int vendorTextId, MyViewHolderClick clickListener) {
+        public MyViewHolder(View itemView, int placeTextId, int vendorTextId, int imageId, MyViewHolderClick clickListener) {
             super(itemView);
             mPlace = (TextView) itemView.findViewById(placeTextId);
             mVendor = (TextView) itemView.findViewById(vendorTextId);
+            mImage = (ImageView) itemView.findViewById(imageId);
             mMyViewHolderClick = clickListener;
             itemView.setOnClickListener(this);
         }
@@ -73,6 +78,10 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
         public void setVendor(String vendor){
             mVendor.setText(vendor);
+        }
+
+        public void setImage(String image){
+            Picasso.with(PlacesRecyclerAdapter.mContext).load(image).into(mImage);
         }
 
         @Override
