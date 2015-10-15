@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
 import com.icaboalo.historystoreapp.util.VUtil;
 
@@ -23,6 +25,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/12/2015.
@@ -56,12 +61,11 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     public void onResume() {
         super.onResume();
         setUpRecyclerView();
+        executeWithRetrofit();
     }
 
     List<PlaceListModel> addPlace(){
         List<PlaceListModel> place = new ArrayList<>();
-        place.add(new PlaceListModel("Av. Magnocentro", "Walmart"));
-        place.add(new PlaceListModel("Blv. Anahuac", "Comercial Mexicana"));
         return place;
     }
 
@@ -105,5 +109,25 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         FragmentManager fragmentManager = getFragmentManager();
         PlaceDialogFragment placeDialogFragment = new PlaceDialogFragment().newInstance("Add Place");
         placeDialogFragment.show(fragmentManager, "fragment_add_place");
+    }
+
+    private void executeWithRetrofit() {
+        ApiClient.searchList(new Callback<ArrayList<ListsModel>>() {
+            @Override
+            public void success(ArrayList<ListsModel> listsModels, Response response) {
+                List<PlaceListModel> newList = new ArrayList<PlaceListModel>();
+                for (int i = 0; i < listsModels.size(); i++) {
+                    String placeName = listsModels.get(i).getPlace().getPlaceName();
+                    String vendorName = listsModels.get(i).getVendor().getVendorName();
+                    newList.add(new PlaceListModel(placeName, vendorName));
+                }
+                placesRecyclerAdapter.newData(newList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 }
