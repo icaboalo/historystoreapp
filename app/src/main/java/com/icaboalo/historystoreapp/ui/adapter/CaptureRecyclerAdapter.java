@@ -22,17 +22,19 @@ public class CaptureRecyclerAdapter extends RecyclerView.Adapter<CaptureRecycler
     List<CaptureListModel> mCapturedList = new ArrayList<>();
     Context mContext;
     LayoutInflater mInflater;
+    MyViewHolder.MyViewHolderClick mClickListener;
 
-    public CaptureRecyclerAdapter(List<CaptureListModel> capturedList, Context context) {
+    public CaptureRecyclerAdapter(List<CaptureListModel> capturedList, Context context, MyViewHolder.MyViewHolderClick clickListener) {
         mCapturedList = capturedList;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+        mClickListener = clickListener;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.capture_list_item_row, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view, R.id.capture_date, R.id.capture_price, R.id.capture_place, R.id.capture_finished);
+        MyViewHolder viewHolder = new MyViewHolder(view, R.id.capture_date, R.id.capture_price, R.id.capture_place, R.id.capture_finished, mClickListener);
         return viewHolder;
     }
 
@@ -54,17 +56,20 @@ public class CaptureRecyclerAdapter extends RecyclerView.Adapter<CaptureRecycler
         return mCapturedList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView mCaptureDate, mCapturePrice, mCapturePlace;
         ImageView mCaptureImage;
+        MyViewHolderClick mMyOnClick;
 
-        public MyViewHolder(View itemView, int captureDateId, int capturePriceId, int capturePlaceId, int captureImageId) {
+        public MyViewHolder(View itemView, int captureDateId, int capturePriceId, int capturePlaceId, int captureImageId, MyViewHolderClick clickListener) {
             super(itemView);
             mCaptureDate = (TextView) itemView.findViewById(captureDateId);
             mCapturePrice = (TextView) itemView.findViewById(capturePriceId);
             mCapturePlace = (TextView) itemView.findViewById(capturePlaceId);
             mCaptureImage = (ImageView) itemView.findViewById(captureImageId);
+            mMyOnClick = clickListener;
+            itemView.setOnClickListener(this);
         }
 
         public void setCaptureDate(String captureDate) {
@@ -79,5 +84,12 @@ public class CaptureRecyclerAdapter extends RecyclerView.Adapter<CaptureRecycler
             mCapturePlace.setText(capturePlace);
         }
 
+        @Override
+        public void onClick(View v) {
+            mMyOnClick.onClick(v);
+        }
+        public interface MyViewHolderClick{
+            void onClick(View view);
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
@@ -30,7 +31,7 @@ import retrofit.client.Response;
 /**
  * Created by icaboalo on 10/6/2015.
  */
-public class CaptureListFragment extends Fragment {
+public class CaptureListFragment extends Fragment implements CaptureRecyclerAdapter.MyViewHolder.MyViewHolderClick {
 
     @Bind(R.id.capture_recycler_view)
     RecyclerView mCaptureRecyclerView;
@@ -71,7 +72,7 @@ public class CaptureListFragment extends Fragment {
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        captureRecyclerAdapter = new CaptureRecyclerAdapter(createCaptureList(), getActivity());
+        captureRecyclerAdapter = new CaptureRecyclerAdapter(createCaptureList(), getActivity(), this);
         mCaptureRecyclerView.setAdapter(captureRecyclerAdapter);
         mCaptureRecyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -95,5 +96,10 @@ public class CaptureListFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(getActivity(), "clicked " + view.toString(), Toast.LENGTH_SHORT).show();
     }
 }
