@@ -83,9 +83,6 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_settings:
                 return true;
-            case R.id.action_add_capture:
-                goToAddCapture();
-                break;
         }
 
         return super.onOptionsItemSelected(item);

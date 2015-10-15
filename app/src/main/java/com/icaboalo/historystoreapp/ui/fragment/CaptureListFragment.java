@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
+import com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity;
 import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by icaboalo on 10/6/2015.
@@ -26,8 +29,6 @@ public class CaptureListFragment extends Fragment {
 
     @Bind(R.id.capture_recycler_view)
     RecyclerView mCaptureRecyclerView;
-
-
 
     @Nullable
     @Override
@@ -47,6 +48,12 @@ public class CaptureListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setUpRecyclerView();
+    }
+
+    @OnClick(R.id.add_capture)
+    void addCapture(){
+            Intent goToAddCapture = new Intent(getActivity(), EmptyFragmentActivity.class);
+            startActivity(goToAddCapture);
     }
 
     List<CaptureListModel> createCaptureList(){
