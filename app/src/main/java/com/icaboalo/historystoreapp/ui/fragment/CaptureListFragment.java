@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity;
 import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
 
@@ -21,6 +23,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/6/2015.
@@ -29,6 +34,8 @@ public class CaptureListFragment extends Fragment {
 
     @Bind(R.id.capture_recycler_view)
     RecyclerView mCaptureRecyclerView;
+
+    CaptureRecyclerAdapter captureRecyclerAdapter;
 
     @Nullable
     @Override
@@ -48,6 +55,7 @@ public class CaptureListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setUpRecyclerView();
+        executeWithRetrofit();
     }
 
     @OnClick(R.id.add_capture)
@@ -58,16 +66,34 @@ public class CaptureListFragment extends Fragment {
 
     List<CaptureListModel> createCaptureList(){
         List<CaptureListModel> captureList = new ArrayList<>();
-        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
-        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
-        captureList.add(new CaptureListModel("13-10-2015", "$200", "Comercial Mexicana"));
         return captureList;
     }
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        CaptureRecyclerAdapter captureRecyclerAdapter = new CaptureRecyclerAdapter(createCaptureList(), getActivity());
+        captureRecyclerAdapter = new CaptureRecyclerAdapter(createCaptureList(), getActivity());
         mCaptureRecyclerView.setAdapter(captureRecyclerAdapter);
         mCaptureRecyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    public void executeWithRetrofit(){
+        ApiClient.searchList(new Callback<ArrayList<ListsModel>>() {
+            @Override
+            public void success(ArrayList<ListsModel> listsModels, Response response) {
+                List<CaptureListModel> captureList = new ArrayList<CaptureListModel>();
+                for (int i = 0; i < listsModels.size(); i++) {
+                    String date = listsModels.get(i).getDate();
+                    String vendor = listsModels.get(i).getVendor().getVendorName();
+                    String price = listsModels.get(i).getTotal();
+                    captureList.add(new CaptureListModel(date, price, vendor));
+                }
+                captureRecyclerAdapter.newData(captureList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 }

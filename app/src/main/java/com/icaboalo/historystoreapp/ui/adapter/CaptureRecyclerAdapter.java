@@ -44,6 +44,11 @@ public class CaptureRecyclerAdapter extends RecyclerView.Adapter<CaptureRecycler
         holder.setCapturePlace(capturedList.getCapturePlace());
     }
 
+    public void newData(List<CaptureListModel> newList){
+        mCapturedList = newList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mCapturedList.size();

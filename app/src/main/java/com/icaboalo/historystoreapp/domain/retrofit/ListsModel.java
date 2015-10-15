@@ -22,6 +22,12 @@ public class ListsModel {
     @SerializedName("status")
     boolean placeListStatus;
 
+    @SerializedName("total")
+    String total;
+
+    @SerializedName("date_shopping")
+    String date;
+
     public String getPlaceListId() {
         return placeListId;
     }
@@ -40,5 +46,13 @@ public class ListsModel {
 
     public boolean isPlaceListStatus() {
         return placeListStatus;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public String getDate() {
+        return date;
     }
 }
