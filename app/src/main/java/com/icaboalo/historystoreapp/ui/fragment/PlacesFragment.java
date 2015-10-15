@@ -2,6 +2,7 @@ package com.icaboalo.historystoreapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
@@ -38,6 +41,9 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     RecyclerView mPlacesRecyclerView;
 
     PlacesRecyclerAdapter placesRecyclerAdapter;
+
+    @Bind(R.id.places_list_container)
+    LinearLayout mPlacesListContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,19 +124,20 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         ApiClient.searchList(new Callback<ArrayList<ListsModel>>() {
             @Override
             public void success(ArrayList<ListsModel> listsModels, Response response) {
-                List<PlaceListModel> newList = new ArrayList<PlaceListModel>();
+                List<PlaceListModel> newList = new ArrayList<>();
                 for (int i = 0; i < listsModels.size(); i++) {
                     String placeName = listsModels.get(i).getPlace().getPlaceName();
                     String vendorName = listsModels.get(i).getVendor().getVendorName();
                     String image = listsModels.get(i).getVendor().getVendorImage();
-                    newList.add(new PlaceListModel(placeName, vendorName, image ));
+                    newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Snackbar.make(mPlacesListContainer, "Error check your internet connection " + error, Snackbar.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Error check your internet connection " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
