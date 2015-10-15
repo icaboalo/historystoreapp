@@ -81,7 +81,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         }
 
         public void setImage(String image){
-            Picasso.with(PlacesRecyclerAdapter.mContext).load(image).into(mImage);
+            Picasso.with(PlacesRecyclerAdapter.mContext).load(image).placeholder(android.R.drawable.stat_notify_error).into(mImage);
         }
 
         @Override
