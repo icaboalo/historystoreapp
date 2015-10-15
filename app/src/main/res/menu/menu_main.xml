@@ -8,7 +8,7 @@
           android:orderInCategory="100"
           app:showAsAction="never"/>
 
-      <item android:id="@+id/action_add_place"
+      <item android:id="@+id/action_add_capture"
             android:title="@string/action_add_capture"
             android:icon="@drawable/ic_add_white_48dp"
             android:orderInCategory="1"
