@@ -6,15 +6,26 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.icaboalo.historystoreapp.R;
+import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
+import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.util.VUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/12/2015.
@@ -24,8 +35,8 @@ public class PlaceDialogFragment extends DialogFragment {
     @Bind(R.id.new_place_input)
     EditText mNewPlaceInput;
 
-    @Bind(R.id.new_vendor_input)
-    EditText mNewVendorInput;
+    @Bind(R.id.vendor_spinner)
+    Spinner mVendorSpinner;
 
     public PlaceDialogFragment() {
 
@@ -47,6 +58,7 @@ public class PlaceDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_places_dialog, null);
         ButterKnife.bind(this, view);
+        executeWithRetrofit();
         alertDialog.setCancelable(true)
                 .setView(view)
                 .setTitle("Add Place");
@@ -55,7 +67,6 @@ public class PlaceDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-                String newVendor = VUtil.extractText(mNewVendorInput);
 
                 dialog.dismiss();
             }
@@ -69,5 +80,33 @@ public class PlaceDialogFragment extends DialogFragment {
         });
         return alertDialog.create();
 
+    }
+
+
+    ArrayAdapter<String> arrayAdapter;
+    public void setUpVendorSpinner(){
+        mVendorSpinner.setAdapter(arrayAdapter);
+    }
+
+    public void executeWithRetrofit(){
+        ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
+            @Override
+            public void success(ArrayList<VendorModel> vendorModels, Response response) {
+                List<String> vendorList = new ArrayList<String>();
+                for (int i = 0; i < vendorModels.size(); i++) {
+                    String vendorName = vendorModels.get(i).getVendorName();
+                    vendorList.add(vendorName);
+                    Log.d("vendorName", vendorName);
+                }
+                arrayAdapter = new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_spinner_dropdown_item, vendorList);
+                setUpVendorSpinner();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 }
