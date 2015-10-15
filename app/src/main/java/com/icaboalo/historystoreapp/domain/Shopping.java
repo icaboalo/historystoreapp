@@ -61,7 +61,7 @@ public class Shopping {
     }
 
     public void setConversion(float conversion) {
-        this.conversion = conversion;
+        this.conversion = Math.round(conversion);
     }
 
     public int getQuantity() {

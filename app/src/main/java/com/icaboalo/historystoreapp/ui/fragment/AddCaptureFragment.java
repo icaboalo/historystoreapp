@@ -76,16 +76,14 @@ public class AddCaptureFragment extends Fragment implements AdapterView.OnItemSe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // TODO Auto-generated method stub
+
+
     }
 
     @OnClick(R.id.image_more_conversion)
     protected void onClickImageMoreConversion(){
         float conversion = this.shopping.getConversion();
-        if(conversion >= 1){
-            this.shopping.setConversion((float) (conversion + 1.00));
-        }else if(conversion < 1){
-            this.shopping.setConversion((float) (conversion + 0.050));
-        }
+        this.shopping.setConversion((float) (conversion + 1.00));
         productConversionText.setText(this.shopping.getConversionString());
     }
 
@@ -94,9 +92,11 @@ public class AddCaptureFragment extends Fragment implements AdapterView.OnItemSe
         float conversion = this.shopping.getConversion();
         if(conversion > 1){
             this.shopping.setConversion((float) (conversion - 1.00));
-        }else if(conversion <= 1){
-            this.shopping.setConversion((float) (conversion - 0.050));
         }
         productConversionText.setText(this.shopping.getConversionString());
+    }
+
+    public void setProductKey(String key){
+        this.shopping.getProduct().setKey(key);
     }
 }
