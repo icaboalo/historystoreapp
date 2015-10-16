@@ -127,8 +127,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
                 List<PlaceListModel> newList = new ArrayList<>();
                 for (int i = 0; i < listsModels.size(); i++) {
                     String placeName = listsModels.get(i).getPlace().getPlaceName();
-                    String vendorName = listsModels.get(i).getVendor().getVendorName();
-                    String image = listsModels.get(i).getVendor().getVendorImage();
+                    String vendorName = listsModels.get(i).getPlace().getVendor().getVendorName();
+                    String image = listsModels.get(i).getPlace().getVendor().getVendorImage();
                     newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);

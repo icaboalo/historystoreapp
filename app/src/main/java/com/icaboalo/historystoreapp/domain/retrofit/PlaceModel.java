@@ -27,6 +27,9 @@ public class PlaceModel {
     @SerializedName("Longitude")
     String placeLongitude;
 
+    @SerializedName("vendor")
+    VendorModel vendor;
+
     public String getPlaceId() {
         return placeId;
     }
@@ -76,5 +79,9 @@ public class PlaceModel {
                 ", placeLatitude='" + placeLatitude + '\'' +
                 ", placeLongitude='" + placeLongitude + '\'' +
                 '}';
+    }
+    
+    public VendorModel getVendor() {
+        return vendor;
     }
 }
