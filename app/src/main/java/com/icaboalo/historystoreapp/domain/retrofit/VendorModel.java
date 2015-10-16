@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 public class VendorModel {
 
+    public VendorModel(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
     @SerializedName("id")
     String vendorId;
 

@@ -7,6 +7,11 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PlaceModel {
 
+    public PlaceModel(String placeName, String vendorId) {
+        this.placeName = placeName;
+        this.vendorId = vendorId;
+    }
+
     @SerializedName("id")
     String placeId;
 
@@ -21,6 +26,9 @@ public class PlaceModel {
 
     @SerializedName("Longitude")
     String placeLongitude;
+
+    @SerializedName("vendor_id")
+    String vendorId;
 
     @SerializedName("vendor")
     VendorModel vendor;
@@ -43,6 +51,41 @@ public class PlaceModel {
 
     public String getPlaceLongitude() {
         return placeLongitude;
+    }
+
+    public String getVendorId() {
+        return vendorId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public void setPlaceImage(String placeImage) {
+        this.placeImage = placeImage;
+    }
+
+    public void setPlaceLatitude(String placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
+
+    public void setPlaceLongitude(String placeLongitude) {
+        this.placeLongitude = placeLongitude;
+    }
+
+    @Override
+    public String toString() {
+        return "PlaceModel{" +
+                "placeId='" + placeId + '\'' +
+                ", placeName='" + placeName + '\'' +
+                ", placeImage='" + placeImage + '\'' +
+                ", placeLatitude='" + placeLatitude + '\'' +
+                ", placeLongitude='" + placeLongitude + '\'' +
+                '}';
     }
 
     public VendorModel getVendor() {

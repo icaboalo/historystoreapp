@@ -1,6 +1,7 @@
 package com.icaboalo.historystoreapp.io;
 
 import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
@@ -24,6 +25,12 @@ public interface ApiService {
     @GET(Constants.PATH_VENDORS)
     void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse);
 
+    @GET(Constants.PATH_PLACES)
+    void searchPlaces(Callback<ArrayList<PlaceModel>> placeApiResponse);
+
     @POST(Constants.PATH_PRODUCTS)
     void postProduct(@Body ProductPostModel productPost, Callback<Response> product);
+
+    @POST(Constants.PATH_PLACES + "/")
+    void postPlace(@Body PlaceModel placeModel, Callback<PlaceModel> placeApiResponse);
 }
