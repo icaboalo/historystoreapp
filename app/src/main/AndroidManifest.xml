@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.icaboalo.historystoreapp" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +25,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.icaboalo.historystoreapp.ui.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.ProductListActivity"
+            android:label="@string/title_activity_product_list"
+            android:parentActivityName=".ui.activity.EmptyFragmentActivity"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity" />
         </activity>
     </application>
 

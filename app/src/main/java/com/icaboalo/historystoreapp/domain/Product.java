@@ -9,6 +9,9 @@ public class Product {
     private String key;
     private String name;
     private Category category;
+    private String type_uom;
+    private float conversion;
+
 
     public Product(){
         this.id = 0;
@@ -53,5 +56,23 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getConversionString() {
+        if(this.type_uom.compareTo("kilogram")==0){
+            if(this.conversion >= 1){
+                return this.conversion + "kg";
+            }else{
+                return (this.conversion * 1000) + "gr";
+            }
+        }else if(this.type_uom.compareTo("liter")==0){
+            if(this.conversion >= 1){
+                return this.conversion + "lt";
+            }else{
+                return (this.conversion * 1000) + "ml";
+            }
+        }else{
+            return this.conversion + "pz";
+        }
     }
 }

@@ -29,4 +29,5 @@
         <item>Lacteos</item>
         <item>Carnes</item>
     </string-array>
+    <string name="title_activity_product_list">ProductListActivity</string>
 </resources>
