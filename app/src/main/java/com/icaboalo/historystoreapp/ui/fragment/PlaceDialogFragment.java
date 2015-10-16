@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -31,7 +32,7 @@ import retrofit.client.Response;
 /**
  * Created by icaboalo on 10/12/2015.
  */
-public class PlaceDialogFragment extends DialogFragment {
+public class PlaceDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     @Bind(R.id.new_place_input)
     EditText mNewPlaceInput;
@@ -60,6 +61,7 @@ public class PlaceDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_places_dialog, null);
         ButterKnife.bind(this, view);
         executeWithRetrofit();
+        mVendorSpinner.setOnItemSelectedListener(this);
         alertDialog.setCancelable(true)
                 .setView(view)
                 .setTitle("Add Place");
@@ -68,7 +70,8 @@ public class PlaceDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-                postPlace(newPlace);
+
+//                postPlace(newPlace);
                 dialog.dismiss();
             }
         });
@@ -80,11 +83,11 @@ public class PlaceDialogFragment extends DialogFragment {
             }
         });
         return alertDialog.create();
-
     }
 
-    private void postPlace(String placeName) {
-        ApiClient.postPlace(new PlaceModel(placeName), new Callback<PlaceModel>() {
+
+    private void postPlace(String placeName, String vendorId) {
+        ApiClient.postPlace(new PlaceModel(placeName, vendorId), new Callback<PlaceModel>() {
             @Override
             public void success(PlaceModel placeModel, Response response) {
                 Log.d("post response", placeModel.toString());
@@ -123,5 +126,15 @@ public class PlaceDialogFragment extends DialogFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PlaceModel {
 
-    public PlaceModel(String placeName) {
+    public PlaceModel(String placeName, String vendorId) {
         this.placeName = placeName;
-        this.placeImage = "test.jpg";
+        this.vendorId = vendorId;
     }
 
     @SerializedName("id")
@@ -26,6 +26,9 @@ public class PlaceModel {
 
     @SerializedName("Longitude")
     String placeLongitude;
+
+    @SerializedName("vendor_id")
+    String vendorId;
 
     @SerializedName("vendor")
     VendorModel vendor;
@@ -48,6 +51,10 @@ public class PlaceModel {
 
     public String getPlaceLongitude() {
         return placeLongitude;
+    }
+
+    public String getVendorId() {
+        return vendorId;
     }
 
     public void setPlaceId(String placeId) {
@@ -80,7 +87,7 @@ public class PlaceModel {
                 ", placeLongitude='" + placeLongitude + '\'' +
                 '}';
     }
-    
+
     public VendorModel getVendor() {
         return vendor;
     }
