@@ -40,6 +40,8 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
     @Bind(R.id.vendor_spinner)
     Spinner mVendorSpinner;
 
+    PlacesFragment mPlacesFragment = new PlacesFragment();
+
     public PlaceDialogFragment() {
 
     }
@@ -68,10 +70,8 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-
-//                postPlace(newPlace);
+                postPlace(newPlace, vendorId);
                 dialog.dismiss();
             }
         });
@@ -90,7 +90,6 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         ApiClient.postPlace(new PlaceModel(placeName, vendorId), new Callback<PlaceModel>() {
             @Override
             public void success(PlaceModel placeModel, Response response) {
-                Log.d("post response", placeModel.toString());
             }
 
             @Override
@@ -102,6 +101,10 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
 
 
     ArrayAdapter<String> arrayAdapter;
+    List<String> vendorList = new ArrayList<>();
+    List<String> vendorIdList = new ArrayList<>();
+    String vendorId;
+
     public void setUpVendorSpinner(){
         mVendorSpinner.setAdapter(arrayAdapter);
     }
@@ -110,10 +113,11 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
             @Override
             public void success(ArrayList<VendorModel> vendorModels, Response response) {
-                List<String> vendorList = new ArrayList<>();
                 for (int i = 0; i < vendorModels.size(); i++) {
                     String vendorName = vendorModels.get(i).getVendorName();
+                    String vendorId = vendorModels.get(i).getVendorId();
                     vendorList.add(vendorName);
+                    vendorIdList.add(vendorId);
                     Log.d("vendorName", vendorName);
                 }
                 arrayAdapter = new ArrayAdapter<>(getActivity(),
@@ -130,7 +134,7 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        vendorId = vendorIdList.get(position);
     }
 
     @Override

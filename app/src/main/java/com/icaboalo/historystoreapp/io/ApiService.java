@@ -31,6 +31,6 @@ public interface ApiService {
     @POST(Constants.PATH_PRODUCTS)
     void postProduct(@Body ProductPostModel productPost, Callback<Response> product);
 
-    @POST(Constants.PATH_PLACES)
+    @POST(Constants.PATH_PLACES + "/")
     void postPlace(@Body PlaceModel placeModel, Callback<PlaceModel> placeApiResponse);
 }

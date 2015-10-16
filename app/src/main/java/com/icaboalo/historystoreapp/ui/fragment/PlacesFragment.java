@@ -120,7 +120,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         placeDialogFragment.show(fragmentManager, "fragment_add_place");
     }
 
-    private void executeWithRetrofit() {
+    public void executeWithRetrofit() {
         ApiClient.searhPlace(new Callback<ArrayList<PlaceModel>>() {
             @Override
             public void success(ArrayList<PlaceModel> listsModels, Response response) {
