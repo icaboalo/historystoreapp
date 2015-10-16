@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
 import com.icaboalo.historystoreapp.util.VUtil;
@@ -121,14 +121,14 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     }
 
     private void executeWithRetrofit() {
-        ApiClient.searchList(new Callback<ArrayList<ListsModel>>() {
+        ApiClient.searhPlace(new Callback<ArrayList<PlaceModel>>() {
             @Override
-            public void success(ArrayList<ListsModel> listsModels, Response response) {
+            public void success(ArrayList<PlaceModel> listsModels, Response response) {
                 List<PlaceListModel> newList = new ArrayList<>();
                 for (int i = 0; i < listsModels.size(); i++) {
-                    String placeName = listsModels.get(i).getPlace().getPlaceName();
-                    String vendorName = listsModels.get(i).getPlace().getVendor().getVendorName();
-                    String image = listsModels.get(i).getPlace().getVendor().getVendorImage();
+                    String placeName = listsModels.get(i).getPlaceName();
+                    String vendorName = listsModels.get(i).getVendor().getVendorName();
+                    String image = listsModels.get(i).getVendor().getVendorImage();
                     newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);
