@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,9 +14,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
-import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
@@ -25,9 +21,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/12/2015.
@@ -40,7 +33,7 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
     @Bind(R.id.vendor_spinner)
     Spinner mVendorSpinner;
 
-    PlacesFragment mPlacesFragment = new PlacesFragment();
+    Communicator mCommunicator;
 
     public PlaceDialogFragment() {
 
@@ -62,8 +55,10 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_places_dialog, null);
         ButterKnife.bind(this, view);
-        executeWithRetrofit();
         mVendorSpinner.setOnItemSelectedListener(this);
+        arrayAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, vendorList);
+        setUpVendorSpinner();
         alertDialog.setCancelable(true)
                 .setView(view)
                 .setTitle("Add Place");
@@ -71,7 +66,7 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-                postPlace(newPlace, vendorId);
+                mCommunicator.respond(newPlace, vendorId);
                 dialog.dismiss();
             }
         });
@@ -85,20 +80,10 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         return alertDialog.create();
     }
 
-
-    private void postPlace(String placeName, String vendorId) {
-        ApiClient.postPlace(new PlaceModel(placeName, vendorId), new Callback<PlaceModel>() {
-            @Override
-            public void success(PlaceModel placeModel, Response response) {
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                error.printStackTrace();
-            }
-        });
+    public void setSpinnerData (List<String> newDataList, List<String> vendorIdList){
+        vendorList = newDataList;
+        this.vendorIdList = vendorIdList;
     }
-
 
     ArrayAdapter<String> arrayAdapter;
     List<String> vendorList = new ArrayList<>();
@@ -109,27 +94,8 @@ public class PlaceDialogFragment extends DialogFragment implements AdapterView.O
         mVendorSpinner.setAdapter(arrayAdapter);
     }
 
-    public void executeWithRetrofit(){
-        ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
-            @Override
-            public void success(ArrayList<VendorModel> vendorModels, Response response) {
-                for (int i = 0; i < vendorModels.size(); i++) {
-                    String vendorName = vendorModels.get(i).getVendorName();
-                    String vendorId = vendorModels.get(i).getVendorId();
-                    vendorList.add(vendorName);
-                    vendorIdList.add(vendorId);
-                    Log.d("vendorName", vendorName);
-                }
-                arrayAdapter = new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_dropdown_item, vendorList);
-                setUpVendorSpinner();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
+    public void setCommunicator(Communicator communicator) {
+        mCommunicator = communicator;
     }
 
     @Override

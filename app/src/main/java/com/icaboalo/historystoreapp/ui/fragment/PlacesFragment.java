@@ -19,12 +19,15 @@ import android.widget.Toast;
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
 import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
+import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
 import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,7 +38,7 @@ import retrofit.client.Response;
 /**
  * Created by icaboalo on 10/12/2015.
  */
-public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.MyViewHolder.MyViewHolderClick {
+public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.MyViewHolder.MyViewHolderClick, Communicator {
 
     @Bind(R.id.places_list)
     RecyclerView mPlacesRecyclerView;
@@ -104,7 +107,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
             case R.id.action_settings:
                 return true;
             case R.id.action_add_place:
-                showDialog();
+                getSpinnerData();
                 break;
             case R.id.action_refresh:
                 executeWithRetrofit();
@@ -114,10 +117,12 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog() {
+    private void showDialog(List<String> spinnerData, List<String> vendorIdList) {
         FragmentManager fragmentManager = getFragmentManager();
         PlaceDialogFragment placeDialogFragment = new PlaceDialogFragment().newInstance("Add Place");
         placeDialogFragment.show(fragmentManager, "fragment_add_place");
+        placeDialogFragment.setSpinnerData(spinnerData, vendorIdList);
+        placeDialogFragment.setCommunicator(this);
     }
 
     public void executeWithRetrofit() {
@@ -138,6 +143,55 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
             public void failure(RetrofitError error) {
                 Snackbar.make(mPlacesListContainer, "Error check your internet connection " + error, Snackbar.LENGTH_LONG).show();
                 Toast.makeText(getActivity(), "Error check your internet connection " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getSpinnerData(){
+        ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
+            @Override
+            public void success(ArrayList<VendorModel> vendorModels, Response response) {
+                List<String> spinnerData = new ArrayList<>();
+                List<String> vendorIdList = new ArrayList<>();
+                for (int i = 0; i < vendorModels.size(); i++) {
+                    String vendorName = vendorModels.get(i).getVendorName();
+                    String vendorId = vendorModels.get(i).getVendorId();
+                    spinnerData.add(vendorName);
+                    vendorIdList.add(vendorId);
+                }
+                showDialog(spinnerData, vendorIdList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void respond(String placeName, String vendorId) {
+        postPlace(placeName, vendorId);
+    }
+
+    private void postPlace(String placeName, String vendorId) {
+        ApiClient.postPlace(new PlaceModel(placeName, vendorId), new Callback<PlaceModel>() {
+            @Override
+            public void success(PlaceModel placeModel, Response response) {
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        executeWithRetrofit();
+                    }
+                };
+                long wait = 3000;
+                Timer timer = new Timer();
+                timer.schedule(task, wait);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }
