@@ -36,4 +36,5 @@
         <item>Lacteos</item>
         <item>Carnes</item>
     </string-array>
+    <string name="title_activity_add_product">AddProductActivity</string>
 </resources>

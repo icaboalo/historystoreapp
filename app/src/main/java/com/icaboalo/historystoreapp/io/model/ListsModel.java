@@ -1,4 +1,4 @@
-package com.icaboalo.historystoreapp.domain.retrofit;
+package com.icaboalo.historystoreapp.io.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,14 +7,16 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ListsModel {
 
+    public ListsModel(String placeListId, String userId) {
+        this.placeListId = placeListId;
+        this.user.userId = userId;
+    }
+
     @SerializedName("id")
     String placeListId;
 
     @SerializedName("place")
     PlaceModel place;
-
-    @SerializedName("vendor")
-    VendorModel vendor;
 
     @SerializedName("user")
     UserModel user;
@@ -34,10 +36,6 @@ public class ListsModel {
 
     public PlaceModel getPlace() {
         return place;
-    }
-
-    public VendorModel getVendor() {
-        return vendor;
     }
 
     public UserModel getUser() {

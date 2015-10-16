@@ -1,4 +1,4 @@
-package com.icaboalo.historystoreapp.domain.retrofit;
+package com.icaboalo.historystoreapp.io.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by icaboalo on 10/10/2015.
  */
 public class VendorModel {
+
+    public VendorModel(String vendorName) {
+        this.vendorName = vendorName;
+    }
 
     @SerializedName("id")
     String vendorId;

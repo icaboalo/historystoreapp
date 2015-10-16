@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity;
 import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
@@ -84,7 +84,7 @@ public class CaptureListFragment extends Fragment implements CaptureRecyclerAdap
                 List<CaptureListModel> captureList = new ArrayList<CaptureListModel>();
                 for (int i = 0; i < listsModels.size(); i++) {
                     String date = listsModels.get(i).getDate();
-                    String vendor = listsModels.get(i).getVendor().getVendorName();
+                    String vendor = listsModels.get(i).getPlace().getVendor().getVendorName();
                     String price = listsModels.get(i).getTotal();
                     captureList.add(new CaptureListModel(date, price, vendor));
                 }

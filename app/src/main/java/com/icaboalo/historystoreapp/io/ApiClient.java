@@ -1,73 +1,66 @@
 package com.icaboalo.historystoreapp.io;
 
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.ProductModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 
 import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/10/2015.
  */
 public class ApiClient {
-//    vendor
-    private static ApiService vendorApiService;
 
-    public static ApiService getVendorApiService(){
-        if (vendorApiService == null){
+    public static ApiService getApiService(){
+        if (mApiService == null){
             RestAdapter restAdapter = new RestAdapter.Builder()
                     .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
                     .build();
-            vendorApiService = restAdapter.create(ApiService.class);
+            mApiService = restAdapter.create(ApiService.class);
         }
-        return vendorApiService;
+        return mApiService;
     }
+    public static ApiService mApiService;
 
+//    @GET vendor
     public static void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse){
-        getVendorApiService().searchVendor(vendorApiResponse);
+        getApiService().searchVendor(vendorApiResponse);
     }
 
 
-//    product
-    public static ApiService productApiService;
-
-    public static ApiService postProductApiService(){
-        if (postProductApiService() == null){
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
-            productApiService = restAdapter.create(ApiService.class);
-        }
-
-        return productApiService;
+//    @GET product
+    public static void searchProduct(Callback<ArrayList<ProductModel>> productApiResponse){
+        getApiService().searchProducts(productApiResponse);
     }
 
-    public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
-        postProductApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
-    }
-
-//    list
-    public static ApiService listApiService;
-    public static ApiService getListApiService(){
-        if (listApiService == null){
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
-            listApiService = restAdapter.create(ApiService.class);
-        }
-
-        return listApiService;
-    }
-
+//    @GET list
     public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
-        getListApiService().searchList(listApiResponse);
+        getApiService().searchList(listApiResponse);
+    }
+
+    //    @POST place
+    public static void postPlace(PlaceModel placeModel, Callback<PlaceModel> placeApiResponse){
+        getApiService().postPlace(placeModel, placeApiResponse);
+    }
+
+//    @GET place
+    public static void searchPlace(Callback<ArrayList<PlaceModel>> placeApiResponse){
+        getApiService().searchPlaces(placeApiResponse);
+    }
+
+//    @POST list created
+    public static void postList(ListsModel listsModel, String listId, Callback<ListsModel> listApiResponse){
+        getApiService().postList(listsModel, listId, listApiResponse);
+    }
+
+//    @POST list
+    public static void postCreateList(ListsModel listsModel, Callback<ListsModel> listApiResponse){
+        getApiService().postCreateList(listsModel, listApiResponse);
     }
 }

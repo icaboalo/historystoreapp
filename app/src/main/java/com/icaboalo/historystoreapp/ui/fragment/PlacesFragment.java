@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -18,13 +19,17 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
+import com.icaboalo.historystoreapp.ui.activity.AddProductActivity;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
-import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,7 +40,7 @@ import retrofit.client.Response;
 /**
  * Created by icaboalo on 10/12/2015.
  */
-public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.MyViewHolder.MyViewHolderClick {
+public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.MyViewHolder.MyViewHolderClick, Communicator {
 
     @Bind(R.id.places_list)
     RecyclerView mPlacesRecyclerView;
@@ -44,6 +49,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     @Bind(R.id.places_list_container)
     LinearLayout mPlacesListContainer;
+
+    String placeId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     List<PlaceListModel> addPlace(){
         List<PlaceListModel> place = new ArrayList<>();
+        place.add(new PlaceListModel("Pabellon Bosques", "Comercial Mexicana", null));
         return place;
     }
 
@@ -83,8 +91,25 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     }
 
     @Override
-    public void onMyClick(View item) {
-        VUtil.replaceFragment(new AddCaptureFragment(), getFragmentManager());
+    public void onMyClick(View item, int position) {
+        Intent goToProductList = new Intent(getActivity(), AddProductActivity.class);
+        Toast.makeText(getActivity(), placeId, Toast.LENGTH_SHORT).show();
+        startActivity(goToProductList);
+//        executePostPlace();
+    }
+
+    private void executePostPlace(String placeListId) {
+        ApiClient.postCreateList(new ListsModel(placeListId, "1"), new Callback<ListsModel>() {
+            @Override
+            public void success(ListsModel listsModel, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
     @Override
@@ -104,7 +129,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
             case R.id.action_settings:
                 return true;
             case R.id.action_add_place:
-                showDialog();
+                getSpinnerData();
                 break;
             case R.id.action_refresh:
                 executeWithRetrofit();
@@ -114,21 +139,24 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog() {
+    private void showDialog(List<String> spinnerData, List<String> vendorIdList) {
         FragmentManager fragmentManager = getFragmentManager();
         PlaceDialogFragment placeDialogFragment = new PlaceDialogFragment().newInstance("Add Place");
         placeDialogFragment.show(fragmentManager, "fragment_add_place");
+        placeDialogFragment.setSpinnerData(spinnerData, vendorIdList);
+        placeDialogFragment.setCommunicator(this);
     }
 
-    private void executeWithRetrofit() {
-        ApiClient.searchList(new Callback<ArrayList<ListsModel>>() {
+    public void executeWithRetrofit() {
+        ApiClient.searchPlace(new Callback<ArrayList<PlaceModel>>() {
             @Override
-            public void success(ArrayList<ListsModel> listsModels, Response response) {
+            public void success(ArrayList<PlaceModel> listsModels, Response response) {
                 List<PlaceListModel> newList = new ArrayList<>();
                 for (int i = 0; i < listsModels.size(); i++) {
-                    String placeName = listsModels.get(i).getPlace().getPlaceName();
+                    String placeName = listsModels.get(i).getPlaceName();
                     String vendorName = listsModels.get(i).getVendor().getVendorName();
                     String image = listsModels.get(i).getVendor().getVendorImage();
+                    placeId = listsModels.get(i).getPlaceId();
                     newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);
@@ -138,6 +166,55 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
             public void failure(RetrofitError error) {
                 Snackbar.make(mPlacesListContainer, "Error check your internet connection " + error, Snackbar.LENGTH_LONG).show();
                 Toast.makeText(getActivity(), "Error check your internet connection " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getSpinnerData(){
+        ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
+            @Override
+            public void success(ArrayList<VendorModel> vendorModels, Response response) {
+                List<String> spinnerData = new ArrayList<>();
+                List<String> vendorIdList = new ArrayList<>();
+                for (int i = 0; i < vendorModels.size(); i++) {
+                    String vendorName = vendorModels.get(i).getVendorName();
+                    String vendorId = vendorModels.get(i).getVendorId();
+                    spinnerData.add(vendorName);
+                    vendorIdList.add(vendorId);
+                }
+                showDialog(spinnerData, vendorIdList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void respond(String placeName, String vendorId) {
+        postPlace(placeName, vendorId);
+    }
+
+    private void postPlace(String placeName, String vendorId) {
+        ApiClient.postPlace(new PlaceModel(placeName, vendorId), new Callback<PlaceModel>() {
+            @Override
+            public void success(PlaceModel placeModel, Response response) {
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        executeWithRetrofit();
+                    }
+                };
+                long wait = 3000;
+                Timer timer = new Timer();
+                timer.schedule(task, wait);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }

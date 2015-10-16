@@ -17,17 +17,11 @@
             android:layout_height="wrap_content"/>
     </android.support.design.widget.TextInputLayout>
 
-
-    <android.support.design.widget.TextInputLayout
+    <Spinner
+        android:id="@+id/vendor_spinner"
         android:layout_marginTop="16dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/new_vendor_input"
-            android:hint="Vendor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>
