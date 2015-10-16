@@ -1,6 +1,7 @@
 package com.icaboalo.historystoreapp.io;
 
 import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
@@ -69,5 +70,23 @@ public class ApiClient {
 
     public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
         getListApiService().searchList(listApiResponse);
+    }
+
+//    place Post
+
+    public static ApiService mApiService;
+    public static ApiService getApiService(){
+        if (mApiService == null){
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(Constants.BASE_URL)
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .build();
+            mApiService = restAdapter.create(ApiService.class);
+        }
+        return mApiService;
+    }
+
+    public static void postPlace(PlaceModel placeModel, Callback<PlaceModel> placeApiResponse){
+        getApiService().postPlace(placeModel, placeApiResponse);
     }
 }

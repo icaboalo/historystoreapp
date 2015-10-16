@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.icaboalo.historystoreapp.R;
+import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.util.VUtil;
@@ -67,7 +68,7 @@ public class PlaceDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 String newPlace = VUtil.extractText(mNewPlaceInput);
-
+                postPlace(newPlace);
                 dialog.dismiss();
             }
         });
@@ -82,6 +83,20 @@ public class PlaceDialogFragment extends DialogFragment {
 
     }
 
+    private void postPlace(String placeName) {
+        ApiClient.postPlace(new PlaceModel(placeName), new Callback<PlaceModel>() {
+            @Override
+            public void success(PlaceModel placeModel, Response response) {
+                Log.d("post response", placeModel.toString());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });
+    }
+
 
     ArrayAdapter<String> arrayAdapter;
     public void setUpVendorSpinner(){
@@ -92,13 +107,13 @@ public class PlaceDialogFragment extends DialogFragment {
         ApiClient.searchVendor(new Callback<ArrayList<VendorModel>>() {
             @Override
             public void success(ArrayList<VendorModel> vendorModels, Response response) {
-                List<String> vendorList = new ArrayList<String>();
+                List<String> vendorList = new ArrayList<>();
                 for (int i = 0; i < vendorModels.size(); i++) {
                     String vendorName = vendorModels.get(i).getVendorName();
                     vendorList.add(vendorName);
                     Log.d("vendorName", vendorName);
                 }
-                arrayAdapter = new ArrayAdapter<String>(getActivity(),
+                arrayAdapter = new ArrayAdapter<>(getActivity(),
                         android.R.layout.simple_spinner_dropdown_item, vendorList);
                 setUpVendorSpinner();
             }
