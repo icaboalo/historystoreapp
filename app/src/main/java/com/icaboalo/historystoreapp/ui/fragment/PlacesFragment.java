@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.activity.AddProductActivity;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;

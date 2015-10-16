@@ -1,8 +1,9 @@
 package com.icaboalo.historystoreapp.io;
 
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
-import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.ProductModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
 
 import java.util.ArrayList;
@@ -27,26 +28,28 @@ public class ApiClient {
     }
     public static ApiService mApiService;
 
-//    vendor
+//    @GET vendor
     public static void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse){
         getApiService().searchVendor(vendorApiResponse);
     }
 
 
-//    product
+//    @GET product
+    public static void searchProduct(Callback<ArrayList<ProductModel>> productApiResponse){
+        getApiService().searchProducts(productApiResponse);
+    }
 
-
-//    list
+//    @GET list
     public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
         getApiService().searchList(listApiResponse);
     }
 
-    //    place Post
+    //    @POST place
     public static void postPlace(PlaceModel placeModel, Callback<PlaceModel> placeApiResponse){
         getApiService().postPlace(placeModel, placeApiResponse);
     }
 
-//    get place
+//    @GET place
     public static void searchPlace(Callback<ArrayList<PlaceModel>> placeApiResponse){
         getApiService().searchPlaces(placeApiResponse);
     }

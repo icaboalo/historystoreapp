@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity;
 import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;

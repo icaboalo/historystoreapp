@@ -32,7 +32,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_row_product_list, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view, R.id.product_name, R.id.product_type, R.id.product_quantity,
+        MyViewHolder viewHolder = new MyViewHolder(view, R.id.product_name, R.id.product_category, R.id.product_quantity,
                 R.id.product_price, R.id.product_image);
         return viewHolder;
     }
@@ -41,7 +41,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ProductListModel productListModel = mProductList.get(position);
         holder.setProductName(productListModel.getProductName());
-        holder.setProductType(productListModel.getProductType());
+        holder.setProductType(productListModel.getProductCategory());
         holder.setProductQuantity(productListModel.getProductQuantity());
         holder.setProductPrice(productListModel.getProductPrice());
     }

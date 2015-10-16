@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.ProductListModel;
+import com.icaboalo.historystoreapp.io.ApiClient;
+import com.icaboalo.historystoreapp.io.model.ProductModel;
 import com.icaboalo.historystoreapp.ui.adapter.ProductRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -18,6 +20,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class AddProductActivity extends AppCompatActivity {
 
@@ -26,6 +31,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     @Bind(R.id.product_recycler_view)
     RecyclerView mProductRecyclerView;
+
+    ProductRecyclerAdapter recyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class AddProductActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setUpRecyclerView();
+        getProductApi();
     }
 
     List<ProductListModel> addProduct(){
@@ -59,8 +67,28 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        ProductRecyclerAdapter recyclerAdapter = new ProductRecyclerAdapter(addProduct(), this);
+        recyclerAdapter = new ProductRecyclerAdapter(addProduct(), this);
         mProductRecyclerView.setLayoutManager(linearLayoutManager);
         mProductRecyclerView.setAdapter(recyclerAdapter);
+    }
+
+    private void getProductApi() {
+        ApiClient.searchProduct(new Callback<ArrayList<ProductModel>>() {
+            @Override
+            public void success(ArrayList<ProductModel> productModels, Response response) {
+                List<ProductListModel> newProductList = new ArrayList<>();
+                for (int i = 0; i < productModels.size(); i++) {
+                    String name = productModels.get(i).getProductName();
+                    String category = productModels.get(i).getCategory().getCategoryName();
+                    newProductList.add(new ProductListModel(name, category, null, null));
+                }
+                recyclerAdapter.newData(newProductList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 }

@@ -5,15 +5,15 @@ package com.icaboalo.historystoreapp.domain;
  */
 public class ProductListModel {
 
-    public ProductListModel(String productName, String productType, String productQuantity, String productPrice) {
+    public ProductListModel(String productName, String productCategory, String productQuantity, String productPrice) {
         this.productName = productName;
-        this.productType = productType;
+        this.productCategory = productCategory;
         this.productQuantity = productQuantity;
         this.productPrice = productPrice;
     }
 
     String productName;
-    String productType;
+    String productCategory;
     String productQuantity;
     String productPrice;
     String productImage;
@@ -22,8 +22,8 @@ public class ProductListModel {
         return productName;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getProductCategory() {
+        return productCategory;
     }
 
     public String getProductQuantity() {
@@ -42,8 +42,8 @@ public class ProductListModel {
         this.productName = productName;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 
     public void setProductQuantity(String productQuantity) {

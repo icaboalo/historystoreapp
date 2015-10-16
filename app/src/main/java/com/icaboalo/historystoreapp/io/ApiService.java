@@ -1,8 +1,9 @@
 package com.icaboalo.historystoreapp.io;
 
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
-import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.ProductModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public interface ApiService {
 
     @GET(Constants.PATH_PLACES)
     void searchPlaces(Callback<ArrayList<PlaceModel>> placeApiResponse);
+
+    @GET(Constants.PATH_PRODUCTS)
+    void searchProducts(Callback<ArrayList<ProductModel>> productApiResponse);
 
     @POST(Constants.PATH_PLACES + "/")
     void postPlace(@Body PlaceModel placeModel, Callback<PlaceModel> placeApiResponse);

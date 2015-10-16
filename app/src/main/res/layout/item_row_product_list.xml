@@ -27,13 +27,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
                         android:layout_alignTop="@+id/product_image"
-                        android:layout_alignLeft="@+id/product_type"
-                        android:layout_alignStart="@+id/product_type"/>
+                        android:layout_alignLeft="@+id/product_category"
+                        android:layout_alignStart="@+id/product_category"/>
 
                     <TextView
                         android:textSize="16sp"
-                        android:id="@+id/product_type"
-                        android:text="Product Type"
+                        android:id="@+id/product_category"
+                        android:text="Product Category"
                         android:layout_below="@+id/product_name"
                         android:layout_toRightOf="@id/product_image"
                         android:layout_width="wrap_content"
