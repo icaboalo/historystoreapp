@@ -51,7 +51,7 @@ public class ApiClient {
     }
 
 //    get place
-    public static void searhPlace(Callback<ArrayList<PlaceModel>> placeApiResonse){
-        getApiService().searchPlaces(placeApiResonse);
+    public static void searchPlace(Callback<ArrayList<PlaceModel>> placeApiResponse){
+        getApiService().searchPlaces(placeApiResponse);
     }
 }

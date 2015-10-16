@@ -126,7 +126,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     }
 
     public void executeWithRetrofit() {
-        ApiClient.searhPlace(new Callback<ArrayList<PlaceModel>>() {
+        ApiClient.searchPlace(new Callback<ArrayList<PlaceModel>>() {
             @Override
             public void success(ArrayList<PlaceModel> listsModels, Response response) {
                 List<PlaceListModel> newList = new ArrayList<>();
