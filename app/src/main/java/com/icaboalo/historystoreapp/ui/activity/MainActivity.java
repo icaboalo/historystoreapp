@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.ui.fragment.CaptureListFragment;
+import com.icaboalo.historystoreapp.ui.fragment.GraphHolderFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-        replaceFragment(new CaptureListFragment());
+        replaceFragment(new GraphHolderFragment());
         navigationViewOnCLick();
     }
 
