@@ -76,6 +76,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     List<PlaceListModel> addPlace(){
         List<PlaceListModel> place = new ArrayList<>();
+        place.add(new PlaceListModel("Pabellon Bosques", "Comercial Mexicana", null));
         return place;
     }
 
