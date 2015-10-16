@@ -16,65 +16,7 @@ import retrofit.client.Response;
  * Created by icaboalo on 10/10/2015.
  */
 public class ApiClient {
-//    vendor
-    private static ApiService vendorApiService;
 
-    public static ApiService getVendorApiService(){
-        if (vendorApiService == null){
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
-            vendorApiService = restAdapter.create(ApiService.class);
-        }
-        return vendorApiService;
-    }
-
-    public static void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse){
-        getVendorApiService().searchVendor(vendorApiResponse);
-    }
-
-
-//    product
-    public static ApiService productApiService;
-
-    public static ApiService postProductApiService(){
-        if (postProductApiService() == null){
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
-            productApiService = restAdapter.create(ApiService.class);
-        }
-
-        return productApiService;
-    }
-
-    public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
-        postProductApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
-    }
-
-//    list
-    public static ApiService listApiService;
-    public static ApiService getListApiService(){
-        if (listApiService == null){
-            RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(Constants.BASE_URL)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
-            listApiService = restAdapter.create(ApiService.class);
-        }
-
-        return listApiService;
-    }
-
-    public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
-        getListApiService().searchList(listApiResponse);
-    }
-
-//    place Post
-
-    public static ApiService mApiService;
     public static ApiService getApiService(){
         if (mApiService == null){
             RestAdapter restAdapter = new RestAdapter.Builder()
@@ -85,7 +27,25 @@ public class ApiClient {
         }
         return mApiService;
     }
+    public static ApiService mApiService;
 
+//    vendor
+    public static void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse){
+        getApiService().searchVendor(vendorApiResponse);
+    }
+
+
+//    product
+    public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
+        getApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
+    }
+
+//    list
+    public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){
+        getApiService().searchList(listApiResponse);
+    }
+
+    //    place Post
     public static void postPlace(PlaceModel placeModel, Callback<PlaceModel> placeApiResponse){
         getApiService().postPlace(placeModel, placeApiResponse);
     }
