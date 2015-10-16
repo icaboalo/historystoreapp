@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -21,8 +22,8 @@ import com.icaboalo.historystoreapp.domain.PlaceListModel;
 import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
+import com.icaboalo.historystoreapp.ui.activity.AddProductActivity;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
-import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     @Override
     public void onMyClick(View item) {
-        VUtil.replaceFragment(new AddCaptureFragment(), getFragmentManager());
+        Intent goToProductList = new Intent(getActivity(), AddProductActivity.class);
+        startActivity(goToProductList);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.icaboalo.historystoreapp.io;
 
 import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
 import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ProductPostModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.constant.Constants;
 
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.client.Response;
 
 /**
  * Created by icaboalo on 10/10/2015.
@@ -36,9 +34,7 @@ public class ApiClient {
 
 
 //    product
-    public static void postProduct(String key, String name, String categoryId, Callback<Response> productApiPost){
-        getApiService().postProduct(new ProductPostModel(key, name, categoryId), productApiPost);
-    }
+
 
 //    list
     public static void searchList(Callback<ArrayList<ListsModel>> listApiResponse){

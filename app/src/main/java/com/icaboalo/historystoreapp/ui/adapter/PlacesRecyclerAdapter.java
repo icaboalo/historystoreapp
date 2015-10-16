@@ -39,7 +39,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
+        final View view = mInflater.inflate(R.layout.item_row_place_list, parent, false);
         final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, R.id.vendor, R.id.place_image, clickListener);
         return viewHolder;
     }
