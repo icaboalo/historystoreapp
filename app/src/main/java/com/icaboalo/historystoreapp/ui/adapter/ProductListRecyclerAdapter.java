@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.domain.Shopping;
+import com.icaboalo.historystoreapp.domain.Product;
+import com.icaboalo.historystoreapp.domain.retrofit.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,43 +18,48 @@ import java.util.List;
 /**
  * Created by richpolis on 15/10/15.
  */
-public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingListRecyclerAdapter.ShoppingListViewHolder> {
+public class ProductListRecyclerAdapter extends RecyclerView.Adapter<ProductListRecyclerAdapter.ProductListViewHolder> {
 
-    List<Shopping> mShoppingList = new ArrayList<>();
+    List<ProductModel> mProductList = new ArrayList<>();
     Context mContext;
     LayoutInflater mInflater;
 
-    public ShoppingListRecyclerAdapter(List<Shopping> shoppingList, Context context) {
-        mShoppingList = shoppingList;
+    public ProductListRecyclerAdapter(List<ProductModel> shoppingList, Context context) {
+        mProductList = shoppingList;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
-    public ShoppingListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.product_list_item, parent, false);
-        ShoppingListViewHolder viewHolder = new ShoppingListViewHolder(view,
+        ProductListViewHolder viewHolder = new ProductListViewHolder(view,
                 R.id.product_category_image, R.id.product_name_label, R.id.product_category_label,
                 R.id.product_price_label, R.id.product_quantity_label);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ShoppingListViewHolder holder, int position) {
-        Shopping shopping = mShoppingList.get(position);
+    public void onBindViewHolder(ProductListViewHolder holder, int position) {
+        ProductModel product = mProductList.get(position);
 
-        holder.setProductName(shopping.getProduct().getName());
-        holder.setProductCategory(shopping.getProduct().getCategory().getName());
-        holder.setProductPrice(shopping.getPrice());
-        holder.setProductQuantity(shopping.getQuantity());
+        holder.setProductName(product.getName());
+        holder.setProductCategory(product.getCategory().getName());
+        holder.setProductPrice(product.getPrice());
+        holder.setProductQuantity(product.getQuantity());
     }
 
     @Override
     public int getItemCount() {
-        return mShoppingList.size();
+        return mProductList.size();
     }
 
-    public class ShoppingListViewHolder extends RecyclerView.ViewHolder{
+    public void newData(ArrayList<ProductModel> listsModels) {
+        mProductList = listsModels;
+        notifyDataSetChanged();
+    }
+
+    public class ProductListViewHolder extends RecyclerView.ViewHolder{
 
         TextView mProductName;
         TextView mProductCategory;
@@ -61,7 +67,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
         TextView mProductQuantity;
         ImageView mCategoryImage;
 
-        public ShoppingListViewHolder(View itemView,
+        public ProductListViewHolder(View itemView,
                                       int productCategoryImageId, int productNameId,
                                       int productCategoryLabelId, int productPriceLabelId,
                                       int productQuantityLabelId) {

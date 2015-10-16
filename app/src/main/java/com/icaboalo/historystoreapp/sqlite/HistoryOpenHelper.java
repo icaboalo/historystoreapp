@@ -10,6 +10,7 @@ import com.icaboalo.historystoreapp.sqlite.constant.DbConstants;
 /**
  * Created by icaboalo on 10/7/2015.
  */
+
 public class HistoryOpenHelper extends SQLiteOpenHelper{
 
     public HistoryOpenHelper(Context context) {

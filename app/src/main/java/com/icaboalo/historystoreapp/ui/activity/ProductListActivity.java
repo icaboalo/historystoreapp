@@ -10,12 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.icaboalo.historystoreapp.R;
-import com.icaboalo.historystoreapp.domain.CaptureListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ListsModel;
-import com.icaboalo.historystoreapp.domain.retrofit.ShoppingListModel;
+import com.icaboalo.historystoreapp.domain.retrofit.CategoryModel;
+import com.icaboalo.historystoreapp.domain.retrofit.ProductModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
-import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
-import com.icaboalo.historystoreapp.ui.adapter.ShoppingListRecyclerAdapter;
+import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
+import com.icaboalo.historystoreapp.ui.adapter.ProductListRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +30,10 @@ public class ProductListActivity extends AppCompatActivity {
     @Bind(R.id.app_bar)
     Toolbar mToolBar;
 
-    @Bind(R.id.shopping_recycler_view)
-    RecyclerView mShoppingRecyclerView;
+    @Bind(R.id.product_recycler_view)
+    RecyclerView mProductRecyclerView;
+
+    ProductListRecyclerAdapter productListRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,6 @@ public class ProductListActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
     }
 
     @Override
@@ -62,30 +61,23 @@ public class ProductListActivity extends AppCompatActivity {
         executeWithRetrofit();
     }
 
-    List<ShoppingListModel> createShoppingList(){
-        List<ShoppingListModel> shoppingList = new ArrayList<>();
-        return shoppingList;
+    List<ProductModel> createProductList(){
+        List<ProductModel> productList = new ArrayList<>();
+        return productList;
     }
 
     private void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        ShoppingListRecyclerAdapter shoppingListAdapter= new ShoppingListRecyclerAdapter(createShoppingList(), this);
-        mShoppingRecyclerView.setAdapter(shoppingListAdapter);
-        mShoppingRecyclerView.setLayoutManager(linearLayoutManager);
+        productListRecyclerAdapter= new ProductListRecyclerAdapter(createProductList(), this);
+        mProductRecyclerView.setAdapter(productListRecyclerAdapter);
+        mProductRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     public void executeWithRetrofit(){
-        ApiClient.searchList(new Callback<ArrayList<ShoppingListModel>>() {
+        ApiClient.searchProductList(new Callback<ArrayList<ProductModel>>() {
             @Override
-            public void success(ArrayList<ShoppingListModel> listsModels, Response response) {
-                List<ShoppingListModel> shoppingList = new ArrayList<ShoppingListModel>();
-                for (int i = 0; i < shoppingList.size(); i++) {
-                    String date = listsModels.get(i).getDate();
-                    String vendor = listsModels.get(i).getPlace().getVendor().getVendorName();
-                    String price = listsModels.get(i).getTotal();
-                    captureList.add(new CaptureListModel(date, price, vendor));
-                }
-                mShoppingRecyclerView.newData(captureList);
+            public void success(ArrayList<ProductModel> listsModels, Response response) {
+                productListRecyclerAdapter.newData(listsModels);
             }
 
             @Override

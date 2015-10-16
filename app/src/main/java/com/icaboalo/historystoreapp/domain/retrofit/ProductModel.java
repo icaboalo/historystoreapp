@@ -24,6 +24,28 @@ public class ProductModel {
     @SerializedName("category")
     CategoryModel category;
 
+    @SerializedName("price")
+    double price;
+
+    @SerializedName("quantity")
+    int quantity;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public long getProductId() {
         return productId;
     }
