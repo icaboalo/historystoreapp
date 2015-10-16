@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.MyViewHolder> {
 
-    List<PlaceListModel> mPlaceList = new ArrayList<>();
+    public static List<PlaceListModel> mPlaceList = new ArrayList<>();
     static Context mContext;
     LayoutInflater mInflater;
     MyViewHolder.MyViewHolderClick clickListener;
@@ -86,10 +86,13 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
         @Override
         public void onClick(View v) {
-            mMyViewHolderClick.onMyClick(v);
+            for (int i = 0; i < mPlaceList.size(); i++) {
+                mMyViewHolderClick.onMyClick(v, i);
+                break;
+            }
         }
         public interface MyViewHolderClick{
-            void onMyClick(View item);
+            void onMyClick(View item, int position);
         }
     }
 }

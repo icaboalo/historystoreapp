@@ -4,7 +4,6 @@ import com.icaboalo.historystoreapp.io.constant.Constants;
 import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.model.PlaceModel;
 import com.icaboalo.historystoreapp.io.model.ProductModel;
-import com.icaboalo.historystoreapp.io.model.ShoppingsModel;
 import com.icaboalo.historystoreapp.io.model.VendorModel;
 
 import java.util.ArrayList;
@@ -55,13 +54,13 @@ public class ApiClient {
         getApiService().searchPlaces(placeApiResponse);
     }
 
-//    @GET Shopping
-    public static void searchShopping(Callback<ArrayList<ShoppingsModel>> shoppingApiResponse){
-        getApiService().searchShoppings(shoppingApiResponse);
+//    @POST list created
+    public static void postList(ListsModel listsModel, String listId, Callback<ListsModel> listApiResponse){
+        getApiService().postList(listsModel, listId, listApiResponse);
     }
 
-//    @POST Shopping
-    public static void postShopping(ShoppingsModel shoppingsModel, String shoppingId, Callback<ShoppingsModel> shoppingsApiResponse){
-        getApiService().postShopping(shoppingsModel, shoppingId, shoppingsApiResponse);
+//    @POST list
+    public static void postCreateList(ListsModel listsModel, Callback<ListsModel> listApiResponse){
+        getApiService().postCreateList(listsModel, listApiResponse);
     }
 }

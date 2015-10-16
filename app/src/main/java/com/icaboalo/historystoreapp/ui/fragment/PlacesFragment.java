@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.model.PlaceModel;
 import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
@@ -48,6 +49,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     @Bind(R.id.places_list_container)
     LinearLayout mPlacesListContainer;
+
+    String placeId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,9 +91,25 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     }
 
     @Override
-    public void onMyClick(View item) {
+    public void onMyClick(View item, int position) {
         Intent goToProductList = new Intent(getActivity(), AddProductActivity.class);
+        Toast.makeText(getActivity(), placeId, Toast.LENGTH_SHORT).show();
         startActivity(goToProductList);
+//        executePostPlace();
+    }
+
+    private void executePostPlace(String placeListId) {
+        ApiClient.postCreateList(new ListsModel(placeListId, "1"), new Callback<ListsModel>() {
+            @Override
+            public void success(ListsModel listsModel, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
     @Override
@@ -137,6 +156,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
                     String placeName = listsModels.get(i).getPlaceName();
                     String vendorName = listsModels.get(i).getVendor().getVendorName();
                     String image = listsModels.get(i).getVendor().getVendorImage();
+                    placeId = listsModels.get(i).getPlaceId();
                     newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);

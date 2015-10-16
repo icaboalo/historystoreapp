@@ -7,6 +7,11 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ListsModel {
 
+    public ListsModel(String placeListId, String userId) {
+        this.placeListId = placeListId;
+        this.user.userId = userId;
+    }
+
     @SerializedName("id")
     String placeListId;
 

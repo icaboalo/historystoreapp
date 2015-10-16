@@ -4,7 +4,6 @@ import com.icaboalo.historystoreapp.io.constant.Constants;
 import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.model.PlaceModel;
 import com.icaboalo.historystoreapp.io.model.ProductModel;
-import com.icaboalo.historystoreapp.io.model.ShoppingsModel;
 import com.icaboalo.historystoreapp.io.model.VendorModel;
 
 import java.util.ArrayList;
@@ -32,11 +31,11 @@ public interface ApiService {
     @GET(Constants.PATH_PRODUCTS)
     void searchProducts(Callback<ArrayList<ProductModel>> productApiResponse);
 
-    @GET(Constants.PATH_SHOPPINGS)
-    void searchShoppings(Callback<ArrayList<ShoppingsModel>> shoppingApiResponse);
+    @POST(Constants.PATH_LISTS + Constants.PATH_LISTS_ID)
+    void postList(@Body ListsModel listsModel, @Path("list_id") String listId, Callback<ListsModel> listApiResponse);
 
-    @POST(Constants.PATH_SHOPPINGS + Constants.PATH_SHOPPINGS_ID)
-    void postShopping(@Body ShoppingsModel shoppingsModel,@Path("shopping_id") String shoppingId, Callback<ShoppingsModel> shoppingApiResponse);
+    @POST(Constants.PATH_LISTS)
+    void postCreateList(@Body ListsModel listsModel, Callback<ListsModel> listApiResponse);
 
     @POST(Constants.PATH_PLACES + "/")
     void postPlace(@Body PlaceModel placeModel, Callback<PlaceModel> placeApiResponse);
