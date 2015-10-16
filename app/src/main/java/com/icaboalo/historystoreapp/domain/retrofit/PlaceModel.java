@@ -22,6 +22,9 @@ public class PlaceModel {
     @SerializedName("Longitude")
     String placeLongitude;
 
+    @SerializedName("vendor")
+    VendorModel vendor;
+
     public String getPlaceId() {
         return placeId;
     }
@@ -40,5 +43,9 @@ public class PlaceModel {
 
     public String getPlaceLongitude() {
         return placeLongitude;
+    }
+
+    public VendorModel getVendor() {
+        return vendor;
     }
 }

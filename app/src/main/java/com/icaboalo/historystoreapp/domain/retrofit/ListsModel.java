@@ -13,9 +13,6 @@ public class ListsModel {
     @SerializedName("place")
     PlaceModel place;
 
-    @SerializedName("vendor")
-    VendorModel vendor;
-
     @SerializedName("user")
     UserModel user;
 
@@ -34,10 +31,6 @@ public class ListsModel {
 
     public PlaceModel getPlace() {
         return place;
-    }
-
-    public VendorModel getVendor() {
-        return vendor;
     }
 
     public UserModel getUser() {
