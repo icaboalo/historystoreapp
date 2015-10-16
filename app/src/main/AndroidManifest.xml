@@ -29,7 +29,11 @@
         <activity
             android:name=".ui.activity.AddProductActivity"
             android:label="@string/title_activity_add_product"
+            android:parentActivityName=".ui.activity.EmptyFragmentActivity"
             android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity" />
         </activity>
     </application>
 

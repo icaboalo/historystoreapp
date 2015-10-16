@@ -18,6 +18,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url "https://jitpack.io" }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,7 +30,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.android.support:recyclerview-v7:23.0.0'
 
-    //    butterknife
+//        butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
 
 //    retrofit
@@ -35,4 +38,8 @@ dependencies {
 
 //    picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+//    charts
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+
 }

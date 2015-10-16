@@ -1,5 +1,6 @@
 package com.icaboalo.historystoreapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -18,11 +19,12 @@ import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.PlaceListModel;
-import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
-import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
+import com.icaboalo.historystoreapp.io.model.PlaceModel;
+import com.icaboalo.historystoreapp.io.model.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
+import com.icaboalo.historystoreapp.ui.activity.AddProductActivity;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
-import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,8 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     @Bind(R.id.places_list_container)
     LinearLayout mPlacesListContainer;
+
+    String placeId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,8 +90,25 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     }
 
     @Override
-    public void onMyClick(View item) {
-        VUtil.replaceFragment(new AddCaptureFragment(), getFragmentManager());
+    public void onMyClick(View item, int position) {
+        Intent goToProductList = new Intent(getActivity(), AddProductActivity.class);
+//        Toast.makeText(getActivity(), placeId, Toast.LENGTH_SHORT).show();
+        startActivity(goToProductList);
+//        executePostPlace();
+    }
+
+    private void executePostPlace(String placeListId) {
+        ApiClient.postCreateList(new ListsModel(placeListId, "1"), new Callback<ListsModel>() {
+            @Override
+            public void success(ListsModel listsModel, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
     @Override
@@ -134,6 +155,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
                     String placeName = listsModels.get(i).getPlaceName();
                     String vendorName = listsModels.get(i).getVendor().getVendorName();
                     String image = listsModels.get(i).getVendor().getVendorImage();
+                    placeId = listsModels.get(i).getPlaceId();
                     newList.add(new PlaceListModel(placeName, vendorName, image));
                 }
                 placesRecyclerAdapter.newData(newList);

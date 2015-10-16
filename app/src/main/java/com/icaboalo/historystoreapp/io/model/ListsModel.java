@@ -1,4 +1,4 @@
-package com.icaboalo.historystoreapp.domain.retrofit;
+package com.icaboalo.historystoreapp.io.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,6 +6,11 @@ import com.google.gson.annotations.SerializedName;
  * Created by icaboalo on 10/14/2015.
  */
 public class ListsModel {
+
+    public ListsModel(String placeListId, String userId) {
+        this.placeListId = placeListId;
+        this.user.userId = userId;
+    }
 
     @SerializedName("id")
     String placeListId;
