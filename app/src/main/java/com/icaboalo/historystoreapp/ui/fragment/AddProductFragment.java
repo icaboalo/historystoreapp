@@ -21,7 +21,7 @@ import butterknife.OnClick;
 /**
  * Created by icaboalo on 10/8/2015.
  */
-public class AddCaptureFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AddProductFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Shopping shopping;
 

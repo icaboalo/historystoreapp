@@ -3,6 +3,7 @@ package com.icaboalo.historystoreapp.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.icaboalo.historystoreapp.domain.ProductListModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.io.model.ProductModel;
 import com.icaboalo.historystoreapp.ui.adapter.ProductRecyclerAdapter;
+import com.icaboalo.historystoreapp.ui.fragment.ProductDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,7 @@ public class AddProductActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                showDialog();
             }
         });
     }
@@ -90,5 +93,11 @@ public class AddProductActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showDialog(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ProductDialogFragment productDialogFragment = new ProductDialogFragment();
+        productDialogFragment.show(fragmentManager, "fragment_add_product");
     }
 }
