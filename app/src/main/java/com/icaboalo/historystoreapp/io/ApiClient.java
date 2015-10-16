@@ -89,4 +89,9 @@ public class ApiClient {
     public static void postPlace(PlaceModel placeModel, Callback<PlaceModel> placeApiResponse){
         getApiService().postPlace(placeModel, placeApiResponse);
     }
+
+//    get place
+    public static void searhPlace(Callback<ArrayList<PlaceModel>> placeApiResonse){
+        getApiService().searchPlaces(placeApiResonse);
+    }
 }

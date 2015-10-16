@@ -25,6 +25,9 @@ public interface ApiService {
     @GET(Constants.PATH_VENDORS)
     void searchVendor(Callback<ArrayList<VendorModel>> vendorApiResponse);
 
+    @GET(Constants.PATH_PLACES)
+    void searchPlaces(Callback<ArrayList<PlaceModel>> placeApiResponse);
+
     @POST(Constants.PATH_PRODUCTS)
     void postProduct(@Body ProductPostModel productPost, Callback<Response> product);
 
