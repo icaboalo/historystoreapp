@@ -79,7 +79,6 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
     List<PlaceListModel> addPlace(){
         List<PlaceListModel> place = new ArrayList<>();
-        place.add(new PlaceListModel("Pabellon Bosques", "Comercial Mexicana", null));
         return place;
     }
 
@@ -93,7 +92,7 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
     @Override
     public void onMyClick(View item, int position) {
         Intent goToProductList = new Intent(getActivity(), AddProductActivity.class);
-        Toast.makeText(getActivity(), placeId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), placeId, Toast.LENGTH_SHORT).show();
         startActivity(goToProductList);
 //        executePostPlace();
     }

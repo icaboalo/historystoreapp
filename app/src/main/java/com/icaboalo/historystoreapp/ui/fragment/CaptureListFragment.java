@@ -9,12 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.domain.CaptureListModel;
-import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
+import com.icaboalo.historystoreapp.io.model.ListsModel;
 import com.icaboalo.historystoreapp.ui.activity.EmptyFragmentActivity;
 import com.icaboalo.historystoreapp.ui.adapter.CaptureRecyclerAdapter;
 
@@ -100,6 +99,6 @@ public class CaptureListFragment extends Fragment implements CaptureRecyclerAdap
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(getActivity(), "clicked " + view.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "clicked " + view.toString(), Toast.LENGTH_SHORT).show();
     }
 }

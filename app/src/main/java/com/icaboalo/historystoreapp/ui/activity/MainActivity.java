@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-        replaceFragment(new GraphHolderFragment());
+        replaceFragment(new CaptureListFragment());
         navigationViewOnCLick();
     }
 
@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_capture_list:
                         fragment = new CaptureListFragment();
+                        break;
+                    case R.id.action_graph:
+                        fragment = new GraphHolderFragment();
                         break;
                 }
                 replaceFragment(fragment);

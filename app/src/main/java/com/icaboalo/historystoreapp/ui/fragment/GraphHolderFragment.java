@@ -27,7 +27,6 @@ public class GraphHolderFragment extends Fragment{
     @Bind(R.id.pie_chart)
     PieChart mPieChart;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,28 +58,34 @@ public class GraphHolderFragment extends Fragment{
 
 		/*creamos una lista para los valores Y*/
         ArrayList<Entry> valsY = new ArrayList<Entry>();
-        valsY.add(new Entry(5 * 100 / 25, 0));
-        valsY.add(new Entry(20 * 100 / 25, 1));
+        valsY.add(new Entry(193 * 100 / 629.5f, 0));
+        valsY.add(new Entry(216.5f * 100 / 629.5f, 1));
+        valsY.add(new Entry(220 * 100 / 629.5f, 2));
 
  		/*creamos una lista para los valores X*/
         ArrayList<String> valsX = new ArrayList<String>();
-        valsX.add("Varones");
-        valsX.add("Mujeres");
+        valsX.add("Bodega Aurrera");
+        valsX.add("City Market");
+        valsX.add("Comercial Mexicana");
 
  		/*creamos una lista de colores*/
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(getResources().getColor(R.color.red_flat));
         colors.add(getResources().getColor(R.color.green_flat));
+        colors.add(getResources().getColor(R.color.accent));
+        colors.add(getResources().getColor(R.color.red_flat));
 
  		/*seteamos los valores de Y y los colores*/
         PieDataSet set1 = new PieDataSet(valsY, "Resultados");
         set1.setSliceSpace(3f);
         set1.setColors(colors);
+        set1.setValueTextSize(14);
 
 		/*seteamos los valores de X*/
         PieData data = new PieData(valsX, set1);
         mPieChart.setData(data);
         mPieChart.highlightValues(null);
+        mPieChart.setCenterText("Lists");
+        mPieChart.setCenterTextSize(14);
         mPieChart.invalidate();
     }
 }
