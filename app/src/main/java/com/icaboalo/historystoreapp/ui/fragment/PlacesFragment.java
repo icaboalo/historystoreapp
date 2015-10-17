@@ -22,7 +22,6 @@ import com.icaboalo.historystoreapp.domain.retrofit.PlaceModel;
 import com.icaboalo.historystoreapp.domain.retrofit.VendorModel;
 import com.icaboalo.historystoreapp.io.ApiClient;
 import com.icaboalo.historystoreapp.ui.adapter.PlacesRecyclerAdapter;
-import com.icaboalo.historystoreapp.util.VUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +82,6 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
         placesRecyclerAdapter = new PlacesRecyclerAdapter(addPlace(), getActivity(), this);
         mPlacesRecyclerView.setLayoutManager(linearLayoutManager);
         mPlacesRecyclerView.setAdapter(placesRecyclerAdapter);
-    }
-
-    @Override
-    public void onMyClick(View item) {
-        VUtil.replaceFragment(new AddCaptureFragment(), getFragmentManager());
     }
 
     @Override
@@ -194,5 +188,10 @@ public class PlacesFragment extends Fragment implements PlacesRecyclerAdapter.My
 
             }
         });
+    }
+
+    @Override
+    public void onMyClick(View item, int position) {
+
     }
 }

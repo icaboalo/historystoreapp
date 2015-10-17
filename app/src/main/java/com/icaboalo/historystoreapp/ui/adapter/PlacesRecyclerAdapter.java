@@ -86,10 +86,10 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
         @Override
         public void onClick(View v) {
-            mMyViewHolderClick.onMyClick(v);
+            mMyViewHolderClick.onMyClick(v, getAdapterPosition());
         }
         public interface MyViewHolderClick{
-            void onMyClick(View item);
+            void onMyClick(View item, int position);
         }
     }
 }
