@@ -33,7 +33,7 @@ public class CaptureRecyclerAdapter extends RecyclerView.Adapter<CaptureRecycler
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.capture_list_item_row, parent, false);
+        View view = mInflater.inflate(R.layout.item_row_capture_list, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view, R.id.capture_date, R.id.capture_price, R.id.capture_place, R.id.capture_finished, mClickListener);
         return viewHolder;
     }

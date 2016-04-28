@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.MyViewHolder> {
 
-    List<PlaceListModel> mPlaceList = new ArrayList<>();
+    public static List<PlaceListModel> mPlaceList = new ArrayList<>();
     static Context mContext;
     LayoutInflater mInflater;
     MyViewHolder.MyViewHolderClick clickListener;
@@ -32,14 +32,14 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         this.clickListener = clickListener;
     }
 
-    public void newData(List<PlaceListModel> newList){
+    public void newData(List<PlaceListModel> newList) {
         mPlaceList = newList;
         notifyDataSetChanged();
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = mInflater.inflate(R.layout.place_list_item_row, parent, false);
+        final View view = mInflater.inflate(R.layout.item_row_place_list, parent, false);
         final MyViewHolder viewHolder = new MyViewHolder(view, R.id.place, R.id.vendor, R.id.place_image, clickListener);
         return viewHolder;
     }
@@ -76,19 +76,22 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
             mPlace.setText(place);
         }
 
-        public void setVendor(String vendor){
+        public void setVendor(String vendor) {
             mVendor.setText(vendor);
         }
 
-        public void setImage(String image){
+        public void setImage(String image) {
             Picasso.with(PlacesRecyclerAdapter.mContext).load(image).placeholder(android.R.drawable.stat_notify_error).into(mImage);
         }
 
         @Override
         public void onClick(View v) {
             mMyViewHolderClick.onMyClick(v, getAdapterPosition());
+
+
         }
-        public interface MyViewHolderClick{
+
+        public interface MyViewHolderClick {
             void onMyClick(View item, int position);
         }
     }

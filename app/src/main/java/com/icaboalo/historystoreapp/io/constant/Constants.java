@@ -13,4 +13,6 @@ public class Constants {
     public static final String PATH_COMMENTS = "/comments";
     public static final String PATH_SHOPPINGS = "/shoppings";
     public static final String PATH_USERS = "/users";
+
+    public static final String PATH_LISTS_ID = "/{list_id}";
 }

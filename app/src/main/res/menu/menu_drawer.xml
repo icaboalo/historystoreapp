@@ -3,13 +3,12 @@
     <group android:checkableBehavior="single"/>
 
     <item android:id="@+id/action_capture_list"
+          android:icon="@drawable/ic_list_black_24dp"
           android:title="@string/capture_list"/>
 
-    <!--<item android:id="@+id/action_udacity"-->
-          <!--android:title="@string/udacity"/>-->
+    <item android:id="@+id/action_graph"
+          android:title="@string/graph"/>
 
-    <!--<item android:id="@+id/action_coursera"-->
-          <!--android:title="@string/coursera"/>-->
 
 
 </menu> 

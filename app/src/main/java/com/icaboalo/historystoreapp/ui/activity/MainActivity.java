@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.icaboalo.historystoreapp.R;
 import com.icaboalo.historystoreapp.ui.fragment.CaptureListFragment;
+import com.icaboalo.historystoreapp.ui.fragment.GraphHolderFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_capture_list:
                         fragment = new CaptureListFragment();
+                        break;
+                    case R.id.action_graph:
+                        fragment = new GraphHolderFragment();
                         break;
                 }
                 replaceFragment(fragment);
