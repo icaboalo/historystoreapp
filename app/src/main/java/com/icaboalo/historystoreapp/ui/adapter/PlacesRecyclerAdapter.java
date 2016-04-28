@@ -32,7 +32,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         this.clickListener = clickListener;
     }
 
-    public void newData(List<PlaceListModel> newList){
+    public void newData(List<PlaceListModel> newList) {
         mPlaceList = newList;
         notifyDataSetChanged();
     }
@@ -76,22 +76,22 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
             mPlace.setText(place);
         }
 
-        public void setVendor(String vendor){
+        public void setVendor(String vendor) {
             mVendor.setText(vendor);
         }
 
-        public void setImage(String image){
+        public void setImage(String image) {
             Picasso.with(PlacesRecyclerAdapter.mContext).load(image).placeholder(android.R.drawable.stat_notify_error).into(mImage);
         }
 
         @Override
         public void onClick(View v) {
-            for (int i = 0; i < mPlaceList.size(); i++) {
-                mMyViewHolderClick.onMyClick(v, i);
-                break;
-            }
+            mMyViewHolderClick.onMyClick(v, getAdapterPosition());
+
+
         }
-        public interface MyViewHolderClick{
+
+        public interface MyViewHolderClick {
             void onMyClick(View item, int position);
         }
     }

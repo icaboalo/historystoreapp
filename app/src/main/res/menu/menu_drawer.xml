@@ -3,6 +3,7 @@
     <group android:checkableBehavior="single"/>
 
     <item android:id="@+id/action_capture_list"
+          android:icon="@drawable/ic_list_black_24dp"
           android:title="@string/capture_list"/>
 
     <item android:id="@+id/action_graph"
@@ -10,4 +11,4 @@
 
 
 
-</menu>
+</menu> 
